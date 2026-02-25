@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JankariTag</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-6">
+
+  <!-- Main container -->
+  <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md text-center">
+   
+     <img src="https://res.cloudinary.com/ds4id27v7/image/upload/fl_preserve_transparency/v1770531695/Screenshot_2026-02-08_114820_wvc124.jpg" alt="logo not found" class="">
+    <p class="text-gray-700 mb-6">
+      Generate and manage QR codes with ease. Tap below to create your own QR code instantly.
+    </p>
+
+    <!-- Redirect button -->
+    <a href="/qrinfoupload"
+       class="block bg-amber-400 text-white text-[20px] font-semibold px-6 py-2 rounded-lg shadow hover:bg-amber-500 transition w-full mb-6">
+       Get Your JTag
+    </a>
+
+    <!-- Update form -->
+    <form action="/update" method="GET" class="space-y-4 text-left">
+      <label for="customId" class="block text-gray-700 font-semibold">Update Your JTag</label>
+      <input type="text" id="customId" name="customId" placeholder="Enter your CustomID" required
+             class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">
+      <button type="submit"
+              class="w-full bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition">
+        Go to Update Page
+      </button>
+    </form>
+ 
+
+
+    <form action="/data" method="GET" class="space-y-4 text-left">
+      <label for="id" class="block text-gray-700 font-semibold">See JTag Info Using ID</label>
+      <input type="text" id="id" name="id" placeholder="Enter your CustomID" required
+             class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">
+      <button type="submit"
+              class="w-full bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition">
+        See info
+      </button>
+    </form>
+  </div>
+
+
+
+
+  <!-- Footer -->
+  <footer class="mt-6 text-gray-500 text-sm text-center">
+    &copy; <%= new Date().getFullYear() %> QR Info App
+  </footer>
+</body>
+</html>
