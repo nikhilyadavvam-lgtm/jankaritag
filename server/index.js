@@ -14,7 +14,7 @@ const orderRoutes = require("./routes/order.routes");
 const shopkeeperRoutes = require("./routes/shopkeeper.routes");
 
 const app = express();
-const port = 3006;
+const port = process.env.PORT;
 
 // Middleware
 app.use(
