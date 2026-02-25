@@ -12,18 +12,23 @@ export default function ShopkeeperDashboard() {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    if (authLoading) return;
-    if (!user || user.role !== "shopkeeper") {
-      setLoading(false);
-      return;
-    }
+    const fetchStats = async () => {
+      if (authLoading) return;
+      if (!user || user.role !== "shopkeeper") {
+        setLoading(false);
+        return;
+      }
 
-    API.get("/shopkeeper/stats")
-      .then((res) => {
+      try {
+        const res = await API.get("/shopkeeper/stats");
         if (res.data.success) setStats(res.data.data);
-      })
-      .catch(() => {})
-      .finally(() => setLoading(false));
+      } catch (err) {
+        console.error("Shopkeeper stats fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchStats();
   }, [user, authLoading]);
 
   const copyReferralCode = () => {

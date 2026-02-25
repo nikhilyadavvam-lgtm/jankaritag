@@ -9,23 +9,28 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (token) {
-      API.get("/auth/me", { headers: { Authorization: `Bearer ${token}` } })
-        .then((res) => {
+    const checkAuth = async () => {
+      if (token) {
+        try {
+          const res = await API.get("/auth/me", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
           if (res.data.success) setUser(res.data.user);
           else {
             setToken(null);
             localStorage.removeItem("jt_token");
           }
-        })
-        .catch(() => {
+        } catch {
           setToken(null);
           localStorage.removeItem("jt_token");
-        })
-        .finally(() => setLoading(false));
-    } else {
-      setLoading(false);
-    }
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
+      }
+    };
+    checkAuth();
   }, [token]);
 
   const login = async (email, password) => {

@@ -23,42 +23,46 @@ export default function AdminDashboard() {
 
   // Verify admin session on mount
   useEffect(() => {
-    const token = localStorage.getItem("admin_token");
-    if (token) {
-      API.get("/admin/me")
-        .then((res) => {
+    const verifyAdmin = async () => {
+      const token = localStorage.getItem("admin_token");
+      if (token) {
+        try {
+          const res = await API.get("/admin/me");
           if (res.data.success) setAdminAuth(true);
           else {
             localStorage.removeItem("admin_token");
             setAdminAuth(false);
           }
-        })
-        .catch(() => {
+        } catch {
           localStorage.removeItem("admin_token");
           setAdminAuth(false);
-        });
-    }
+        }
+      }
+    };
+    verifyAdmin();
   }, []);
 
   // Fetch stats when authenticated
   useEffect(() => {
-    if (!adminAuth) {
-      setLoading(false);
-      return;
-    }
-
-    API.get("/admin/stats")
-      .then((res) => {
-        if (res.data.success) setStats(res.data.data);
-      })
-      .catch(() => {})
-      .finally(() => setLoading(false));
-
-    API.get("/admin/shopkeepers")
-      .then((res) => {
-        if (res.data.success) setShopkeepers(res.data.data);
-      })
-      .catch(() => {});
+    const fetchStats = async () => {
+      if (!adminAuth) {
+        setLoading(false);
+        return;
+      }
+      try {
+        const [statsRes, skRes] = await Promise.all([
+          API.get("/admin/stats"),
+          API.get("/admin/shopkeepers"),
+        ]);
+        if (statsRes.data.success) setStats(statsRes.data.data);
+        if (skRes.data.success) setShopkeepers(skRes.data.data);
+      } catch (err) {
+        console.error("Admin fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchStats();
   }, [adminAuth]);
 
   const handleAdminLogin = async (e) => {

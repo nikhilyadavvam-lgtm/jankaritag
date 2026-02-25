@@ -15,43 +15,67 @@ export default function UpdateQrInfo() {
   const [error, setError] = useState("");
 
   const [form, setForm] = useState({
-    category: "VEHICLE",
+    category: "",
     name: "",
     location: "",
     phone: "",
     info: "",
   });
 
-  useEffect(() => {
-    if (authLoading) return;
-    if (!user) {
-      setLoading(false);
-      return;
-    }
-    if (!customId) {
-      setError("No Custom ID provided");
-      setLoading(false);
-      return;
-    }
+  const labels = {
+    WATER_COOLER: {
+      title: "Update Water Cooler Tag",
+      ownerLabel: "Service Provider / Person",
+      infoLabel: "Maintenance Notes",
+      infoPlaceholder: "Cleaning frequency, last serviced date...",
+      icon: "ri-drop-fill",
+    },
+    VEHICLE: {
+      title: "Update Vehicle Tag",
+      ownerLabel: "Owner Name",
+      infoLabel: "Additional Details",
+      infoPlaceholder: "Make, model, registration number...",
+      icon: "ri-car-fill",
+    },
+  };
 
-    API.get(`/update?customId=${encodeURIComponent(customId)}`)
-      .then((res) => {
+  const currentLabels = labels[form.category] || labels.VEHICLE;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (authLoading) return;
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+      if (!customId) {
+        setError("No Custom ID provided");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const res = await API.get(
+          `/update?customId=${encodeURIComponent(customId)}`,
+        );
         if (res.data.success) {
           const asset = res.data.data;
           setData(asset);
           setForm({
-            category: "VEHICLE",
+            category: asset.category || "VEHICLE",
             name: asset.name || "",
             location: asset.location || "",
             phone: asset.phone || "",
             info: asset.info || "",
           });
         }
-      })
-      .catch((err) =>
-        setError(err.response?.data?.message || "Failed to load data"),
-      )
-      .finally(() => setLoading(false));
+      } catch (err) {
+        setError(err.response?.data?.message || "Failed to load data");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
   }, [customId, user, authLoading]);
 
   const handleChange = (e) =>
@@ -134,11 +158,11 @@ export default function UpdateQrInfo() {
             </button>
             <div className="flex items-center gap-4 md:gap-6">
               <div className="w-14 h-14 md:w-16 md:h-16 rounded-sm bg-black flex items-center justify-center text-orange-600 border-2 border-black shadow-[4px_4px_0px_#0D0D0D] shrink-0">
-                <i className="ri-edit-2-fill text-2xl md:text-3xl"></i>
+                <i className={`${currentLabels.icon} text-2xl md:text-3xl`}></i>
               </div>
               <div>
                 <h1 className="text-2xl md:text-4xl font-black text-black tracking-tight leading-none mb-2">
-                  update vehicle tag
+                  {currentLabels.title}
                 </h1>
                 <p className="text-neutral-500 font-medium text-[13px]">
                   editing:{" "}
@@ -163,17 +187,19 @@ export default function UpdateQrInfo() {
             <div className="animate-fade-in-up">
               <form onSubmit={handleSubmit}>
                 <div className="brutal-card p-6 md:p-12 space-y-8">
-                  {/* Vehicle badge */}
+                  {/* Category badge */}
                   <div className="flex items-center gap-3 pb-6 border-b-2 border-neutral-100">
                     <div className="w-10 h-10 rounded-sm bg-orange-600 text-white flex items-center justify-center border-2 border-black">
-                      <i className="ri-car-fill text-lg"></i>
+                      <i className={`${currentLabels.icon} text-lg`}></i>
                     </div>
                     <div>
                       <h3 className="font-black text-black text-sm uppercase tracking-widest">
-                        vehicle details
+                        {form.category.toLowerCase().replace(/_/g, " ")} details
                       </h3>
                       <p className="text-[10px] text-neutral-400 font-medium">
-                        update your vehicle tag information
+                        update your{" "}
+                        {form.category.toLowerCase().replace(/_/g, " ")} tag
+                        information
                       </p>
                     </div>
                   </div>
@@ -182,7 +208,7 @@ export default function UpdateQrInfo() {
                     <div className="space-y-3">
                       <label className="text-[11px] font-bold uppercase tracking-widest text-neutral-500 flex items-center gap-2">
                         <i className="ri-user-star-line text-orange-600"></i>{" "}
-                        owner name
+                        {currentLabels.ownerLabel}
                       </label>
                       <input
                         type="text"
@@ -190,7 +216,7 @@ export default function UpdateQrInfo() {
                         value={form.name}
                         onChange={handleChange}
                         className="input-brutal"
-                        placeholder="vehicle owner name"
+                        placeholder={currentLabels.ownerLabel.toLowerCase()}
                       />
                     </div>
 
@@ -230,7 +256,7 @@ export default function UpdateQrInfo() {
                   <div className="space-y-3">
                     <label className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-neutral-500">
                       <i className="ri-file-list-3-line text-orange-600 text-base"></i>{" "}
-                      additional details
+                      {currentLabels.infoLabel}
                     </label>
                     <textarea
                       name="info"
@@ -238,7 +264,7 @@ export default function UpdateQrInfo() {
                       onChange={handleChange}
                       rows={3}
                       className="input-brutal resize-none"
-                      placeholder="any additional information about your vehicle"
+                      placeholder={currentLabels.infoPlaceholder}
                     />
                   </div>
 
@@ -256,7 +282,8 @@ export default function UpdateQrInfo() {
                       ) : (
                         <>
                           <i className="ri-shield-flash-line text-lg"></i>{" "}
-                          update vehicle tag
+                          update{" "}
+                          {form.category.toLowerCase().replace(/_/g, " ")} tag
                         </>
                       )}
                     </button>

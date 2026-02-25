@@ -1,73 +1,30 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
+import API from "../api";
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const [tracks, setTracks] = useState([]);
+  const [plans, setPlans] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const tracks = [
-    {
-      id: "WATER_COOLER",
-      title: "Water Cooler",
-      desc: "Track cleaning dates, maintenance, and hygiene records for water coolers. Anyone can scan the QR and see the details instantly.",
-      icon: "ri-drop-fill",
-      items: ["Cleaning Dates", "Cleaner Name", "Location", "Maintenance"],
-    },
-    {
-      id: "VEHICLE",
-      title: "Vehicle",
-      desc: "Keep your vehicle safe with a smart QR tag. If someone finds your vehicle, they can scan the QR and contact you immediately.",
-      icon: "ri-car-fill",
-      items: ["Owner Info", "Contact", "Location", "Vehicle Details"],
-    },
-  ];
-
-  const plans = [
-    {
-      name: "Normal User",
-      price: "₹120",
-      period: "/service",
-      color: "border-black",
-      highlight: false,
-      features: [
-        "5 QR codes per month",
-        "Online service included",
-        "Physical sticker: ₹59",
-        "Scan & view tag details",
-        "Email support",
-      ],
-      cta: "Get Started",
-    },
-    {
-      name: "Shopkeeper",
-      price: "₹120",
-      period: "/setup",
-      color: "border-orange-600",
-      highlight: true,
-      features: [
-        "49 QR codes per month",
-        "Stick JTag on customer vehicles",
-        "Earn 5% commission",
-        "Save on sticker printing",
-        "No delivery charges",
-      ],
-      cta: "Join as Shopkeeper",
-    },
-    {
-      name: "Institute",
-      price: "₹3,000",
-      period: "/month",
-      color: "border-black",
-      highlight: false,
-      features: [
-        "100 QR codes per month",
-        "Cleaning & repair alerts",
-        "Asset tracking dashboard",
-        "Bulk sticker management",
-        "Priority support",
-      ],
-      cta: "Contact Us",
-    },
-  ];
+  useEffect(() => {
+    const fetchConfig = async () => {
+      try {
+        const res = await API.get("/config");
+        if (res.data.success) {
+          setTracks(res.data.data.tracks);
+          setPlans(res.data.data.plans);
+        }
+      } catch (err) {
+        console.error("Failed to fetch config:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchConfig();
+  }, []);
 
   return (
     <Layout>
@@ -155,35 +112,43 @@ export default function HomePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {tracks.map((track) => (
-                <div
-                  key={track.id}
-                  className="brutal-card p-8 flex flex-col cursor-pointer"
-                  onClick={() =>
-                    navigate("/qrinfoupload", { state: { category: track.id } })
-                  }
-                >
-                  <div className="w-14 h-14 rounded-sm bg-black flex items-center justify-center mb-6 text-orange-600">
-                    <i className={`${track.icon} text-2xl`}></i>
-                  </div>
-                  <h3 className="text-xl font-black text-black tracking-tight mb-2">
-                    {track.title}
-                  </h3>
-                  <p className="text-neutral-500 text-sm font-medium leading-relaxed mb-6">
-                    {track.desc}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {track.items.map((item, j) => (
-                      <span
-                        key={j}
-                        className="px-2.5 py-1 bg-white rounded-sm text-[10px] font-bold text-neutral-500 border-2 border-neutral-200 uppercase tracking-widest"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
+              {loading ? (
+                <div className="col-span-full py-20 flex items-center justify-center">
+                  <i className="ri-loader-4-line animate-spin text-5xl text-orange-600"></i>
                 </div>
-              ))}
+              ) : (
+                tracks.map((track) => (
+                  <div
+                    key={track.id}
+                    className="brutal-card p-8 flex flex-col cursor-pointer"
+                    onClick={() =>
+                      navigate("/qrinfoupload", {
+                        state: { category: track.id },
+                      })
+                    }
+                  >
+                    <div className="w-14 h-14 rounded-sm bg-black flex items-center justify-center mb-6 text-orange-600">
+                      <i className={`${track.icon} text-2xl`}></i>
+                    </div>
+                    <h3 className="text-xl font-black text-black tracking-tight mb-2">
+                      {track.title}
+                    </h3>
+                    <p className="text-neutral-500 text-sm font-medium leading-relaxed mb-6">
+                      {track.desc}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {track.items.map((item, j) => (
+                        <span
+                          key={j}
+                          className="px-2.5 py-1 bg-white rounded-sm text-[10px] font-bold text-neutral-500 border-2 border-neutral-200 uppercase tracking-widest"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </section>
@@ -270,54 +235,60 @@ export default function HomePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-              {plans.map((plan, i) => (
-                <div
-                  key={i}
-                  className={`bg-white border-2 ${plan.color} rounded-sm p-6 flex flex-col relative ${plan.highlight ? "shadow-[6px_6px_0px_#ea580c]" : "shadow-[4px_4px_0px_#0D0D0D]"}`}
-                >
-                  {plan.highlight && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-orange-600 text-white text-[9px] font-black uppercase tracking-widest rounded-sm border-2 border-black">
-                      Popular
-                    </div>
-                  )}
-                  <h3 className="text-lg font-black text-black uppercase tracking-tight mb-2">
-                    {plan.name}
-                  </h3>
-                  <div className="flex items-end gap-1 mb-5">
-                    <span className="text-4xl font-black text-black">
-                      {plan.price}
-                    </span>
-                    <span className="text-sm font-bold text-neutral-400 mb-1">
-                      {plan.period}
-                    </span>
-                  </div>
-                  <ul className="space-y-3 mb-6 flex-1">
-                    {plan.features.map((feature, j) => (
-                      <li
-                        key={j}
-                        className="flex items-start gap-2 text-sm font-medium text-neutral-600"
-                      >
-                        <i className="ri-checkbox-circle-fill text-orange-600 text-base mt-0.5 shrink-0"></i>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <button
-                    onClick={() =>
-                      navigate(
-                        i === 1 ? "/register" : i === 2 ? "#" : "/register",
-                      )
-                    }
-                    className={`w-full py-3 rounded-sm font-bold text-[11px] uppercase tracking-widest border-2 cursor-pointer transition-all ${
-                      plan.highlight
-                        ? "bg-orange-600 text-white border-orange-600 hover:bg-black hover:border-black"
-                        : "bg-black text-white border-black hover:bg-orange-600 hover:border-orange-600"
-                    }`}
-                  >
-                    {plan.cta}
-                  </button>
+              {loading ? (
+                <div className="col-span-full py-20 flex items-center justify-center">
+                  <i className="ri-loader-4-line animate-spin text-5xl text-orange-600"></i>
                 </div>
-              ))}
+              ) : (
+                plans.map((plan, i) => (
+                  <div
+                    key={i}
+                    className={`bg-white border-2 ${plan.color} rounded-sm p-6 flex flex-col relative ${plan.highlight ? "shadow-[6px_6px_0px_#ea580c]" : "shadow-[4px_4px_0px_#0D0D0D]"}`}
+                  >
+                    {plan.highlight && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-orange-600 text-white text-[9px] font-black uppercase tracking-widest rounded-sm border-2 border-black">
+                        Popular
+                      </div>
+                    )}
+                    <h3 className="text-lg font-black text-black uppercase tracking-tight mb-2">
+                      {plan.name}
+                    </h3>
+                    <div className="flex items-end gap-1 mb-5">
+                      <span className="text-4xl font-black text-black">
+                        {plan.price}
+                      </span>
+                      <span className="text-sm font-bold text-neutral-400 mb-1">
+                        {plan.period}
+                      </span>
+                    </div>
+                    <ul className="space-y-3 mb-6 flex-1">
+                      {plan.features.map((feature, j) => (
+                        <li
+                          key={j}
+                          className="flex items-start gap-2 text-sm font-medium text-neutral-600"
+                        >
+                          <i className="ri-checkbox-circle-fill text-orange-600 text-base mt-0.5 shrink-0"></i>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <button
+                      onClick={() =>
+                        navigate(
+                          i === 1 ? "/register" : i === 2 ? "#" : "/register",
+                        )
+                      }
+                      className={`w-full py-3 rounded-sm font-bold text-[11px] uppercase tracking-widest border-2 cursor-pointer transition-all ${
+                        plan.highlight
+                          ? "bg-orange-600 text-white border-orange-600 hover:bg-black hover:border-black"
+                          : "bg-black text-white border-black hover:bg-orange-600 hover:border-orange-600"
+                      }`}
+                    >
+                      {plan.cta}
+                    </button>
+                  </div>
+                ))
+              )}
             </div>
 
             {/* Sticker Pricing Note */}

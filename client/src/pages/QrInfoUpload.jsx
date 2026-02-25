@@ -1,16 +1,20 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Layout from "../components/Layout";
 import API from "../api";
 
 export default function QrInfoUpload() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, loading: authLoading } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const initialCategory = location.state?.category || "VEHICLE";
+
   const [form, setForm] = useState({
-    category: "VEHICLE",
+    category: initialCategory,
     customId: "",
     name: "",
     location: "",
@@ -18,6 +22,27 @@ export default function QrInfoUpload() {
     info: "",
     customerEmail: "",
   });
+
+  const labels = {
+    WATER_COOLER: {
+      title: "Water Cooler Tag",
+      desc: "Add details for your water cooler and get a QR sticker",
+      ownerLabel: "Service Provider / Responsible Person",
+      infoLabel: "Maintenance/Cleaning Notes",
+      infoPlaceholder: "Cleaning frequency, last serviced date...",
+      icon: "ri-drop-fill",
+    },
+    VEHICLE: {
+      title: "Vehicle Tag",
+      desc: "Add your vehicle details and get a QR sticker",
+      ownerLabel: "Owner Name",
+      infoLabel: "Additional Details",
+      infoPlaceholder: "Make, model, registration number...",
+      icon: "ri-car-fill",
+    },
+  };
+
+  const currentLabels = labels[form.category] || labels.VEHICLE;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -180,14 +205,16 @@ export default function QrInfoUpload() {
             </button>
             <div className="flex items-center gap-4 md:gap-6">
               <div className="w-14 h-14 md:w-16 md:h-16 rounded-sm bg-orange-600 flex items-center justify-center border-2 border-black shadow-[4px_4px_0px_#0D0D0D] shrink-0">
-                <i className="ri-add-circle-fill text-2xl md:text-3xl text-white"></i>
+                <i
+                  className={`${currentLabels.icon} text-2xl md:text-3xl text-white`}
+                ></i>
               </div>
               <div>
                 <h1 className="text-2xl md:text-4xl font-black text-black tracking-tight leading-none mb-1">
-                  create tag
+                  {currentLabels.title}
                 </h1>
                 <p className="text-neutral-500 font-medium text-xs md:text-sm">
-                  add your vehicle details and get a QR sticker
+                  {currentLabels.desc}
                 </p>
               </div>
             </div>
@@ -271,17 +298,20 @@ export default function QrInfoUpload() {
                 </div>
               )}
 
-              {/* Vehicle Details */}
+              {/* Asset Details */}
               <div className="flex items-center gap-3 pb-2">
                 <div className="w-10 h-10 rounded-sm bg-neutral-100 border-2 border-neutral-200 flex items-center justify-center">
-                  <i className="ri-car-fill text-orange-600 text-lg"></i>
+                  <i
+                    className={`${currentLabels.icon} text-orange-600 text-lg`}
+                  ></i>
                 </div>
                 <div>
                   <h3 className="font-black text-black text-sm">
-                    vehicle details
+                    {form.category.toLowerCase().replace(/_/g, " ")} details
                   </h3>
                   <p className="text-[10px] text-neutral-400 font-medium">
-                    fill in the info for your vehicle tag
+                    fill in the info for your{" "}
+                    {form.category.toLowerCase().replace(/_/g, " ")} tag
                   </p>
                 </div>
               </div>
@@ -307,14 +337,14 @@ export default function QrInfoUpload() {
 
                 <div className="space-y-2">
                   <label className="text-[11px] font-bold text-neutral-500 tracking-wide">
-                    owner name
+                    {currentLabels.ownerLabel}
                   </label>
                   <input
                     type="text"
                     name="name"
                     value={form.name}
                     onChange={handleChange}
-                    placeholder="vehicle owner name"
+                    placeholder={currentLabels.ownerLabel.toLowerCase()}
                     className="input-brutal"
                   />
                 </div>
@@ -352,14 +382,14 @@ export default function QrInfoUpload() {
               {/* Additional Info */}
               <div className="space-y-2">
                 <label className="text-[11px] font-bold text-neutral-500 tracking-wide">
-                  additional details
+                  {currentLabels.infoLabel}
                 </label>
                 <textarea
                   name="info"
                   value={form.info}
                   onChange={handleChange}
                   rows={3}
-                  placeholder="make, model, registration number..."
+                  placeholder={currentLabels.infoPlaceholder}
                   className="input-brutal resize-none"
                 />
               </div>

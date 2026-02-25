@@ -12,19 +12,22 @@ export default function Result() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!id) {
-      setError("No ID provided");
-      setLoading(false);
-      return;
-    }
-    API.get(`/data?id=${encodeURIComponent(id)}`)
-      .then((res) => {
+    const fetchData = async () => {
+      if (!id) {
+        setError("No ID provided");
+        setLoading(false);
+        return;
+      }
+      try {
+        const res = await API.get(`/data?id=${encodeURIComponent(id)}`);
         if (res.data.success) setData(res.data.data);
-      })
-      .catch((err) =>
-        setError(err.response?.data?.message || "Failed to load data"),
-      )
-      .finally(() => setLoading(false));
+      } catch (err) {
+        setError(err.response?.data?.message || "Failed to load data");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
   }, [id]);
 
   if (loading)
@@ -166,7 +169,7 @@ export default function Result() {
                             {field.value}
                           </a>
                         ) : (
-                          <p className="text-black font-bold text-base break-words leading-relaxed">
+                          <p className="text-black font-bold text-base wrap-break-word leading-relaxed">
                             {field.value}
                           </p>
                         )}

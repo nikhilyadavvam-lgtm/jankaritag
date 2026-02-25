@@ -14,24 +14,28 @@ export default function Profile() {
   const [activeTab, setActiveTab] = useState("tags");
 
   useEffect(() => {
-    if (authLoading) return;
-    if (!user) {
-      setLoading(false);
-      return;
-    }
+    const fetchData = async () => {
+      if (authLoading) return;
+      if (!user) {
+        setLoading(false);
+        return;
+      }
 
-    Promise.all([
-      API.get("/my-tags")
-        .then((res) => {
-          if (res.data.success) setTags(res.data.data);
-        })
-        .catch(() => {}),
-      API.get("/orders/my-orders")
-        .then((res) => {
-          if (res.data.success) setOrders(res.data.data);
-        })
-        .catch(() => {}),
-    ]).finally(() => setLoading(false));
+      try {
+        const [tagsRes, ordersRes] = await Promise.all([
+          API.get("/my-tags"),
+          API.get("/orders/my-orders"),
+        ]);
+
+        if (tagsRes.data.success) setTags(tagsRes.data.data);
+        if (ordersRes.data.success) setOrders(ordersRes.data.data);
+      } catch (err) {
+        console.error("Profile fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
   }, [user, authLoading]);
 
   const statusColors = {
@@ -256,7 +260,7 @@ export default function Profile() {
                       className="brutal-card h-full flex flex-col overflow-hidden"
                     >
                       {/* Sticker Image */}
-                      <div className="relative aspect-[16/11] bg-neutral-50 overflow-hidden flex items-center justify-center border-b-2 border-black">
+                      <div className="relative aspect-16/11 bg-neutral-50 overflow-hidden flex items-center justify-center border-b-2 border-black">
                         {tag.imgurl && !tag.imgurl.startsWith("/") ? (
                           <img
                             src={tag.imgurl}
@@ -760,7 +764,7 @@ export default function Profile() {
                       <p className="text-[10px] text-neutral-400 font-bold uppercase tracking-widest mb-1">
                         {field.label}
                       </p>
-                      <p className="text-black font-bold text-sm break-words">
+                      <p className="text-black font-bold text-sm wrap-break-word">
                         {field.value || "Not set"}
                       </p>
                     </div>

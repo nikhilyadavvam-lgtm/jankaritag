@@ -14,7 +14,7 @@ const orderRoutes = require("./routes/order.routes");
 const shopkeeperRoutes = require("./routes/shopkeeper.routes");
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(
@@ -22,7 +22,8 @@ app.use(
     origin: [
       "http://localhost:5174",
       "http://127.0.0.1:5174",
-      "https://disloyal-poem.outray.app",
+      "https://www.jankaritag.in",
+      "https://jankaritag.vercel.app/",
     ],
     credentials: true,
   }),
@@ -68,6 +69,76 @@ app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/shopkeeper", shopkeeperRoutes);
+app.get("/api/config", (req, res) => {
+  res.json({
+    success: true,
+    data: {
+      tracks: [
+        {
+          id: "WATER_COOLER",
+          title: "Water Cooler",
+          desc: "Track cleaning dates, maintenance, and hygiene records for water coolers. Anyone can scan the QR and see the details instantly.",
+          icon: "ri-drop-fill",
+          items: ["Cleaning Dates", "Cleaner Name", "Location", "Maintenance"],
+        },
+        {
+          id: "VEHICLE",
+          title: "Vehicle",
+          desc: "Keep your vehicle safe with a smart QR tag. If someone finds your vehicle, they can scan the QR and contact you immediately.",
+          icon: "ri-car-fill",
+          items: ["Owner Info", "Contact", "Location", "Vehicle Details"],
+        },
+      ],
+      plans: [
+        {
+          name: "Normal User",
+          price: "₹120",
+          period: "/service",
+          color: "border-black",
+          highlight: false,
+          features: [
+            "5 QR codes per month",
+            "Online service included",
+            "Physical sticker: ₹59",
+            "Scan & view tag details",
+            "Email support",
+          ],
+          cta: "Get Started",
+        },
+        {
+          name: "Shopkeeper",
+          price: "₹120",
+          period: "/setup",
+          color: "border-orange-600",
+          highlight: true,
+          features: [
+            "49 QR codes per month",
+            "Stick JTag on customer vehicles",
+            "Earn 5% commission",
+            "Save on sticker printing",
+            "No delivery charges",
+          ],
+          cta: "Join as Shopkeeper",
+        },
+        {
+          name: "Institute",
+          price: "₹3,000",
+          period: "/month",
+          color: "border-black",
+          highlight: false,
+          features: [
+            "100 QR codes per month",
+            "Cleaning & repair alerts",
+            "Asset tracking dashboard",
+            "Bulk sticker management",
+            "Priority support",
+          ],
+          cta: "Contact Us",
+        },
+      ],
+    },
+  });
+});
 
 // API Routes
 
@@ -432,9 +503,9 @@ app.get("/api/my-commissions", verifyToken, async (req, res) => {
 });
 
 // Serve React Frontend in Production
-app.use(express.static(path.join(__dirname, "../client", "dist")));
-app.get("/{*splat}", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client", "dist", "index.html"));
-});
+// app.use(express.static(path.join(__dirname, "../client", "dist")));
+// app.get("/{*splat}", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../client", "dist", "index.html"));
+// });
 
 app.listen(port, () => console.log("Server is running on port ", port));
