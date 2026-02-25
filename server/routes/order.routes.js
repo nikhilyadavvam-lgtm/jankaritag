@@ -43,10 +43,11 @@ router.post("/initiate", verifyToken, async (req, res) => {
     }
 
     const amount = calculatePrice(quantity);
-    const isDev = (process.env.DEV_MODE || "").trim().toLowerCase() === "true";
+    const skipPayment =
+      (process.env.SKIP_PAYMENT || "").trim().toLowerCase() === "true";
 
-    // ── DEV MODE: Create order directly as paid, skip Razorpay ──
-    if (isDev) {
+    // ── SKIP_PAYMENT: Create order directly as paid, skip Razorpay ──
+    if (skipPayment) {
       const order = new Order({
         userId: req.user._id,
         tagId,

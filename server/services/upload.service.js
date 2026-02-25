@@ -2,8 +2,8 @@ const cloudinary = require("../config/cloudinary");
 const path = require("path");
 const fs = require("fs");
 
-const isDev = () =>
-  (process.env.DEV_MODE || "").trim().toLowerCase() === "true";
+const isSkipUpload = () =>
+  (process.env.SKIP_UPLOAD || "").trim().toLowerCase() === "true";
 
 // Save base64 image to local /public/uploads folder and return a localhost URL
 function saveLocally(base64, folder, publicId) {
@@ -24,7 +24,7 @@ function saveLocally(base64, folder, publicId) {
 
 async function uploadBase64Image(base64, folder, publicId) {
   // In dev mode, save locally instead of uploading to Cloudinary
-  if (isDev()) {
+  if (isSkipUpload()) {
     console.log(`📁 [DEV] Saving image locally: ${folder}/${publicId}`);
     return saveLocally(base64, folder, publicId);
   }

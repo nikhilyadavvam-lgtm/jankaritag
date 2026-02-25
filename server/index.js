@@ -165,10 +165,11 @@ app.post("/api/qrinfo/initiate", verifyToken, async (req, res) => {
         .json({ success: false, message: "This Tag ID already exists." });
     }
 
-    const isDev = (process.env.DEV_MODE || "").trim().toLowerCase() === "true";
+    const skipPayment =
+      (process.env.SKIP_PAYMENT || "").trim().toLowerCase() === "true";
 
-    // ── DEV MODE: Skip payment entirely ──
-    if (isDev) {
+    // ── SKIP_PAYMENT: Skip payment entirely ──
+    if (skipPayment) {
       console.log("🔧 [DEV] Bypassing payment for tag creation:", customId);
       return res.json({
         success: true,
@@ -230,10 +231,11 @@ app.post("/api/qrinfo/initiate", verifyToken, async (req, res) => {
 // Step 2: Verify payment and create tag
 app.post("/api/qrinfo/verify-and-create", verifyToken, async (req, res) => {
   try {
-    const isDev = (process.env.DEV_MODE || "").trim().toLowerCase() === "true";
+    const skipPayment =
+      (process.env.SKIP_PAYMENT || "").trim().toLowerCase() === "true";
 
-    // ── DEV MODE: Create tag directly without payment verification ──
-    if (isDev) {
+    // ── SKIP_PAYMENT: Create tag directly without payment verification ──
+    if (skipPayment) {
       const { tagData } = req.body;
       if (!tagData) {
         return res
