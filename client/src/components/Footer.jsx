@@ -106,11 +106,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3 text-sm text-gray-500">
                 <i className="ri-mail-fill text-yellow-500 text-base"></i>{" "}
-                support@jankaritag.com
+                support@jankaritag.in
               </li>
               <li className="flex items-center gap-3 text-sm text-gray-500">
                 <i className="ri-map-pin-2-fill text-yellow-500 text-base"></i>{" "}
-                New Delhi, India
+                Chomu,Jaipur,Rajasthan,India
               </li>
             </ul>
           </div>
@@ -121,11 +121,11 @@ export default function Footer() {
       <div className="border-t border-gray-200 py-5 bg-dark-blue">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3">
           <p className="text-xs text-gray-400">
-            &copy; {new Date().getFullYear()} JankariTag • All Rights Reserved
+            &copy; {new Date().getFullYear()} JankariTag • All Rights Reserved • YadavG Devs
           </p>
           <div className="flex items-center gap-2 text-xs text-gray-400">
-            Made in <span className="text-white font-semibold ml-1">India</span>{" "}
-            <i className="ri-heart-fill text-yellow-400 ml-1"></i>
+            Developed By <span className="text-white font-semibold ml-1"><a href="https://nikhim.me">Nikhil</a></span>{" "}
+            <i className="ri-heart-fill text-red-400 ml-1"></i>
           </div>
         </div>
       </div>

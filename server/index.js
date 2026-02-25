@@ -74,20 +74,25 @@ app.get("/api/config", (req, res) => {
     success: true,
     data: {
       tracks: [
+        // {
+        //   id: "WATER_COOLER",
+        //   title: "Water Cooler",
+        //   desc: "Track cleaning dates, maintenance, and hygiene records for water coolers. Anyone can scan the QR and see the details instantly.",
+        //   icon: "ri-drop-fill",
+        //   items: ["Cleaning Dates", "Cleaner Name", "Location", "Maintenance"],
+        // },
         {
-          id: "WATER_COOLER",
-          title: "Water Cooler",
-          desc: "Track cleaning dates, maintenance, and hygiene records for water coolers. Anyone can scan the QR and see the details instantly.",
-          icon: "ri-drop-fill",
-          items: ["Cleaning Dates", "Cleaner Name", "Location", "Maintenance"],
-        },
-        {
-          id: "VEHICLE",
-          title: "Vehicle",
-          desc: "Keep your vehicle safe with a smart QR tag. If someone finds your vehicle, they can scan the QR and contact you immediately.",
-          icon: "ri-car-fill",
-          items: ["Owner Info", "Contact", "Location", "Vehicle Details"],
-        },
+  id: "VEHICLE",
+  title: "Vehicle",
+  desc: "Attach a smart QR tag to your bike, scooter, cycle, or car. If someone finds your vehicle or you are in emergency then they can scan the QR code and see your contact details instantly and can contact you/ Family member and help you.",
+  icon: "ri-motorbike-fill",
+  items: [
+    "Owner Name",
+    "Phone Number",
+    "Vehicle Number",
+    "Additional Note"
+  ],
+},
       ],
       plans: [
         {
@@ -163,6 +168,56 @@ app.post("/api/qrinfo/initiate", verifyToken, async (req, res) => {
       return res
         .status(400)
         .json({ success: false, message: "This Tag ID already exists." });
+    }
+
+    // ── Rate Limiting: Check tag creation limits ──
+    const User = require("./models/user.model");
+    const fullUser = await User.findById(req.user._id);
+    const userRole = fullUser?.role || "user";
+
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const startOfDay = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+    );
+
+    const monthlyCount = await Qrinfo.countDocuments({
+      createdBy: req.user._id,
+      createdAt: { $gte: startOfMonth },
+    });
+
+    if (userRole === "shopkeeper") {
+      if (monthlyCount >= 49) {
+        return res.status(429).json({
+          success: false,
+          message:
+            "Monthly limit reached. Shopkeepers can create up to 49 tags per month.",
+        });
+      }
+    } else {
+      // Normal user limits
+      if (monthlyCount >= 5) {
+        return res.status(429).json({
+          success: false,
+          message:
+            "Monthly limit reached. You can create up to 5 tags per month.",
+        });
+      }
+
+      const dailyCount = await Qrinfo.countDocuments({
+        createdBy: req.user._id,
+        createdAt: { $gte: startOfDay },
+      });
+
+      if (dailyCount >= 1) {
+        return res.status(429).json({
+          success: false,
+          message:
+            "Daily limit reached. You can create 1 tag per day. Try again tomorrow.",
+        });
+      }
     }
 
     const skipPayment =

@@ -63,7 +63,7 @@ export default function Navbar() {
                 to="/profile"
                 className="flex items-center gap-3 p-1.5 pr-4 bg-gray-50 rounded-xl hover:bg-yellow-50 transition-all group"
               >
-                <div className="w-8 h-8 rounded-lg bg-dark-blue flex items-center justify-center text-xs font-bold text-yellow-400 group-hover:bg-yellow-400 group-hover:text-gray-900 transition-all">
+                <div className="w-8 h-8 rounded-lg bg-dark-blue flex items-center justify-center text-xs font-bold text-yellow-400 group-hover:bg-yellow-400 group-hover:text-gray-100 transition-all">
                   {user.name?.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex flex-col">
