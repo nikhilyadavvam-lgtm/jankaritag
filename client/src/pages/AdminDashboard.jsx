@@ -127,29 +127,29 @@ export default function AdminDashboard() {
   if (!adminAuth)
     return (
       <Layout>
-        <div className="bg-white min-h-screen flex items-center justify-center py-20 px-4">
-          <div className="brutal-card p-8 md:p-10 max-w-md w-full">
+        <div className="bg-gradient-to-br from-gray-50 to-yellow-50/30 min-h-screen flex items-center justify-center py-20 px-4">
+          <div className="mm-card-lg p-8 md:p-10 max-w-md w-full">
             <div className="text-center mb-8">
-              <div className="w-16 h-16 rounded-sm bg-black flex items-center justify-center mx-auto mb-4">
-                <i className="ri-admin-fill text-3xl text-orange-600"></i>
+              <div className="w-16 h-16 rounded-2xl bg-dark-blue flex items-center justify-center mx-auto mb-4 shadow-md">
+                <i className="ri-admin-fill text-3xl text-yellow-400"></i>
               </div>
-              <h2 className="text-2xl font-black text-black tracking-tight mb-1">
+              <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight mb-1">
                 Admin Login
               </h2>
-              <p className="text-neutral-500 text-sm font-medium">
+              <p className="text-gray-500 text-sm">
                 Enter your admin credentials
               </p>
             </div>
 
             {loginError && (
-              <div className="bg-red-50 border-2 border-red-500 text-red-600 px-4 py-3 rounded-sm mb-6 text-[11px] font-bold uppercase tracking-widest flex items-center gap-2">
+              <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl mb-6 text-sm font-medium flex items-center gap-2">
                 <i className="ri-error-warning-fill text-lg"></i> {loginError}
               </div>
             )}
 
             <form onSubmit={handleAdminLogin} className="space-y-4">
               <div>
-                <label className="text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 block">
+                <label className="text-sm font-medium text-gray-600 mb-2 block">
                   Email
                 </label>
                 <input
@@ -160,11 +160,11 @@ export default function AdminDashboard() {
                   }
                   required
                   placeholder="admin@jankaritag.com"
-                  className="input-brutal"
+                  className="input-mm"
                 />
               </div>
               <div>
-                <label className="text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 block">
+                <label className="text-sm font-medium text-gray-600 mb-2 block">
                   Password
                 </label>
                 <input
@@ -175,13 +175,13 @@ export default function AdminDashboard() {
                   }
                   required
                   placeholder="Enter password"
-                  className="input-brutal"
+                  className="input-mm"
                 />
               </div>
               <button
                 type="submit"
                 disabled={loginLoading}
-                className="btn-brutal btn-brutal-primary w-full py-3 disabled:opacity-50"
+                className="btn-mm btn-mm-primary w-full py-3 disabled:opacity-50"
               >
                 {loginLoading ? (
                   <>
@@ -197,7 +197,7 @@ export default function AdminDashboard() {
             <div className="mt-6 text-center">
               <Link
                 to="/"
-                className="text-sm font-medium text-neutral-400 hover:text-black transition-colors"
+                className="text-sm font-medium text-gray-400 hover:text-gray-700 transition-colors"
               >
                 ← Back to Home
               </Link>
@@ -211,7 +211,7 @@ export default function AdminDashboard() {
     return (
       <Layout>
         <div className="min-h-screen bg-white flex items-center justify-center">
-          <i className="ri-loader-4-line animate-spin text-4xl text-orange-600"></i>
+          <i className="ri-loader-4-line animate-spin text-4xl text-yellow-500"></i>
         </div>
       </Layout>
     );
@@ -252,38 +252,38 @@ export default function AdminDashboard() {
     .reduce((s, o) => s + (o.amount || 0), 0);
 
   const statusColors = {
-    pending: "bg-yellow-100 text-yellow-700 border-yellow-300",
-    paid: "bg-green-100 text-green-700 border-green-300",
-    failed: "bg-red-100 text-red-700 border-red-300",
-    processing: "bg-blue-100 text-blue-700 border-blue-300",
-    shipped: "bg-purple-100 text-purple-700 border-purple-300",
-    delivered: "bg-green-100 text-green-700 border-green-300",
-    cancelled: "bg-red-100 text-red-700 border-red-300",
+    pending: "bg-yellow-100 text-yellow-700",
+    paid: "bg-green-100 text-green-700",
+    failed: "bg-red-100 text-red-700",
+    processing: "bg-blue-100 text-blue-700",
+    shipped: "bg-purple-100 text-purple-700",
+    delivered: "bg-green-100 text-green-700",
+    cancelled: "bg-red-100 text-red-700",
   };
 
   return (
     <Layout>
-      <div className="bg-white min-h-screen py-20 px-4">
+      <div className="bg-gray-50 min-h-screen py-20 px-4">
         <div className="max-w-[1400px] mx-auto">
           {/* Top Bar */}
-          <div className="border-2 border-black rounded-sm bg-black p-6 md:p-8 mb-8 animate-fade-in-up">
+          <div className="rounded-2xl bg-dark-blue p-6 md:p-8 mb-8 animate-fade-in-up shadow-lg">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-sm bg-orange-600 flex items-center justify-center text-white shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-yellow-400 flex items-center justify-center text-gray-900 shrink-0">
                   <i className="ri-dashboard-fill text-2xl"></i>
                 </div>
                 <div>
-                  <h1 className="text-xl font-black text-white tracking-tight mb-0.5">
-                    admin dashboard
+                  <h1 className="text-xl font-extrabold text-white tracking-tight mb-0.5">
+                    Admin Dashboard
                   </h1>
-                  <p className="text-[10px] font-bold text-neutral-400 tracking-widest">
-                    jankaritag control panel
+                  <p className="text-xs font-medium text-gray-400">
+                    JankariTag Control Panel
                   </p>
                 </div>
               </div>
               <button
                 onClick={handleAdminLogout}
-                className="px-4 py-2 bg-white/10 text-white rounded-sm text-[10px] font-bold uppercase tracking-widest hover:bg-red-500 transition-all cursor-pointer border border-white/20 hover:border-red-500"
+                className="px-4 py-2 bg-white/10 text-white rounded-lg text-xs font-semibold hover:bg-red-500 transition-all cursor-pointer"
               >
                 <i className="ri-logout-circle-r-fill mr-2"></i> Logout
               </button>
@@ -293,49 +293,49 @@ export default function AdminDashboard() {
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
               {[
                 {
-                  label: "users",
+                  label: "Users",
                   value: stats?.totalUsers || 0,
                   icon: "ri-team-fill",
                   color: "text-yellow-400",
                 },
                 {
-                  label: "tags",
+                  label: "Tags",
                   value: stats?.totalTags || 0,
                   icon: "ri-price-tag-3-fill",
-                  color: "text-orange-600",
+                  color: "text-orange-400",
                 },
                 {
-                  label: "qr codes",
+                  label: "QR Codes",
                   value: stats?.totalQRCodes || 0,
                   icon: "ri-qr-code-fill",
                   color: "text-green-400",
                 },
                 {
-                  label: "stickers",
+                  label: "Stickers",
                   value: stats?.totalStickers || 0,
                   icon: "ri-sticky-note-fill",
                   color: "text-blue-400",
                 },
                 {
-                  label: "sticker orders",
+                  label: "Sticker Orders",
                   value: stickerOrders.length,
                   icon: "ri-shopping-cart-2-fill",
                   color: "text-purple-400",
                 },
                 {
-                  label: "service plans",
+                  label: "Service Plans",
                   value: servicePayments.length,
                   icon: "ri-global-fill",
                   color: "text-cyan-400",
                 },
                 {
-                  label: "sticker ₹",
+                  label: "Sticker ₹",
                   value: `₹${stickerRevenue}`,
                   icon: "ri-money-rupee-circle-fill",
                   color: "text-emerald-400",
                 },
                 {
-                  label: "service ₹",
+                  label: "Service ₹",
                   value: `₹${serviceRevenue}`,
                   icon: "ri-money-rupee-circle-fill",
                   color: "text-sky-400",
@@ -343,15 +343,15 @@ export default function AdminDashboard() {
               ].map((stat, i) => (
                 <div
                   key={i}
-                  className="bg-white/5 border border-white/10 rounded-sm px-4 py-3"
+                  className="bg-white/5 border border-white/10 rounded-xl px-4 py-3"
                 >
                   <div className="flex items-center gap-1.5 mb-1">
                     <i className={`${stat.icon} ${stat.color} text-sm`}></i>
-                    <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest">
+                    <span className="text-[10px] font-medium text-gray-400">
                       {stat.label}
                     </span>
                   </div>
-                  <p className={`text-2xl font-black ${stat.color}`}>
+                  <p className={`text-2xl font-extrabold ${stat.color}`}>
                     {stat.value}
                   </p>
                 </div>
@@ -363,27 +363,27 @@ export default function AdminDashboard() {
           <div className="flex flex-col md:flex-row items-center gap-4 mb-6 animate-fade-in-up">
             <div className="flex gap-2 flex-wrap">
               {[
-                { key: "tags", label: "tags", icon: "ri-price-tag-3-fill" },
+                { key: "tags", label: "Tags", icon: "ri-price-tag-3-fill" },
                 {
                   key: "orders",
-                  label: "stickers",
+                  label: "Stickers",
                   icon: "ri-shopping-cart-2-fill",
                 },
-                { key: "services", label: "services", icon: "ri-global-fill" },
+                { key: "services", label: "Services", icon: "ri-global-fill" },
                 {
                   key: "shopkeepers",
-                  label: "shopkeepers",
+                  label: "Shopkeepers",
                   icon: "ri-store-2-fill",
                 },
-                { key: "users", label: "users", icon: "ri-team-fill" },
+                { key: "users", label: "Users", icon: "ri-team-fill" },
               ].map((tab) => (
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
-                  className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-sm text-[10px] font-bold tracking-widest border-2 transition-all cursor-pointer ${
+                  className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                     activeTab === tab.key
-                      ? "bg-black text-white border-black"
-                      : "bg-white text-neutral-500 border-neutral-200 hover:border-black"
+                      ? "bg-dark-blue text-white shadow-md"
+                      : "bg-white text-gray-500 hover:bg-gray-100 shadow-sm"
                   }`}
                 >
                   <i className={`${tab.icon} text-sm`}></i> {tab.label}
@@ -391,16 +391,16 @@ export default function AdminDashboard() {
               ))}
             </div>
             <div className="relative flex-1 max-w-xl">
-              <i className="ri-search-2-line absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400"></i>
+              <i className="ri-search-2-line absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search..."
-                className="input-brutal pl-12 py-3"
+                className="input-mm pl-12 py-3"
               />
             </div>
-            <span className="px-3 py-1 text-[9px] font-black uppercase tracking-widest text-neutral-400 border-2 border-neutral-200 rounded-sm">
+            <span className="px-3 py-1 text-[10px] font-semibold text-gray-400 bg-white rounded-full shadow-sm">
               {activeTab === "orders"
                 ? filteredStickerOrders.length
                 : activeTab === "services"
@@ -414,27 +414,27 @@ export default function AdminDashboard() {
 
           {/* Tags Table */}
           {activeTab === "tags" && (
-            <div className="brutal-card overflow-hidden animate-fade-in-up">
+            <div className="mm-card-lg overflow-hidden animate-fade-in-up">
               <div className="overflow-x-auto scrollbar-hide">
                 <table className="w-full min-w-[700px]">
                   <thead>
-                    <tr className="bg-black text-white">
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                    <tr className="bg-dark-blue text-white">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Tag ID
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Category
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Owner
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Location
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Created By
                       </th>
-                      <th className="text-right py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-right py-3 px-4 text-xs font-semibold">
                         Action
                       </th>
                     </tr>
@@ -443,25 +443,25 @@ export default function AdminDashboard() {
                     {filteredTags.map((tag, i) => (
                       <tr
                         key={tag._id}
-                        className={`${i % 2 === 0 ? "bg-white" : "bg-neutral-50"} border-b border-neutral-100`}
+                        className={`${i % 2 === 0 ? "bg-white" : "bg-gray-50"} border-b border-gray-100`}
                       >
                         <td className="py-3 px-4">
-                          <span className="font-mono font-black text-[11px] text-black">
+                          <span className="font-mono font-semibold text-sm text-gray-900">
                             {tag.customId}
                           </span>
                         </td>
                         <td className="py-3 px-4">
-                          <span className="px-2 py-0.5 bg-neutral-100 border border-neutral-200 rounded-sm text-[9px] font-bold uppercase tracking-widest text-neutral-500">
-                            {tag.category}
+                          <span className="px-2.5 py-0.5 bg-gray-100 rounded-full text-[10px] font-semibold text-gray-500 capitalize">
+                            {tag.category?.toLowerCase().replace(/_/g, " ")}
                           </span>
                         </td>
-                        <td className="py-3 px-4 text-[12px] font-bold text-black">
+                        <td className="py-3 px-4 text-sm font-semibold text-gray-900">
                           {tag.name || "—"}
                         </td>
-                        <td className="py-3 px-4 text-[12px] font-medium text-neutral-500 truncate max-w-[180px]">
+                        <td className="py-3 px-4 text-sm text-gray-500 truncate max-w-[180px]">
                           {tag.location || "—"}
                         </td>
-                        <td className="py-3 px-4 text-[12px] text-neutral-400 font-medium">
+                        <td className="py-3 px-4 text-sm text-gray-400">
                           {tag.createdBy?.name || "—"}
                         </td>
                         <td className="py-3 px-4 text-right">
@@ -470,14 +470,14 @@ export default function AdminDashboard() {
                               onClick={() =>
                                 navigate(`/data?id=${tag.customId}`)
                               }
-                              className="w-7 h-7 rounded-sm bg-white border border-neutral-200 text-neutral-400 hover:border-orange-600 hover:text-orange-600 transition-all flex items-center justify-center"
+                              className="w-7 h-7 rounded-lg bg-white border border-gray-200 text-gray-400 hover:text-yellow-600 hover:border-yellow-400 transition-all flex items-center justify-center cursor-pointer"
                               title="View"
                             >
                               <i className="ri-eye-line text-xs"></i>
                             </button>
                             <button
                               onClick={() => handleDeleteTag(tag._id)}
-                              className="w-7 h-7 rounded-sm bg-white border border-neutral-200 text-neutral-400 hover:border-red-500 hover:text-red-500 transition-all flex items-center justify-center"
+                              className="w-7 h-7 rounded-lg bg-white border border-gray-200 text-gray-400 hover:border-red-400 hover:text-red-500 transition-all flex items-center justify-center cursor-pointer"
                               title="Delete"
                             >
                               <i className="ri-delete-bin-5-line text-xs"></i>
@@ -491,8 +491,8 @@ export default function AdminDashboard() {
               </div>
               {filteredTags.length === 0 && (
                 <div className="py-16 text-center">
-                  <i className="ri-inbox-2-fill text-4xl text-neutral-200 mb-4 block"></i>
-                  <p className="text-neutral-400 text-[11px] font-bold uppercase tracking-widest">
+                  <i className="ri-inbox-2-fill text-4xl text-gray-200 mb-4 block"></i>
+                  <p className="text-gray-400 text-sm font-medium">
                     No tags found
                   </p>
                 </div>
@@ -502,36 +502,36 @@ export default function AdminDashboard() {
 
           {/* Orders Table */}
           {activeTab === "orders" && (
-            <div className="brutal-card overflow-hidden animate-fade-in-up">
+            <div className="mm-card-lg overflow-hidden animate-fade-in-up">
               <div className="overflow-x-auto scrollbar-hide">
                 <table className="w-full min-w-[900px]">
                   <thead>
-                    <tr className="bg-black text-white">
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                    <tr className="bg-dark-blue text-white">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Name
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Phone
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Address
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Pincode
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Tag ID
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Amount
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Payment
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Status
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Date
                       </th>
                     </tr>
@@ -540,32 +540,32 @@ export default function AdminDashboard() {
                     {filteredStickerOrders.map((order, i) => (
                       <tr
                         key={order._id}
-                        className={`${i % 2 === 0 ? "bg-white" : "bg-neutral-50"} border-b border-neutral-100`}
+                        className={`${i % 2 === 0 ? "bg-white" : "bg-gray-50"} border-b border-gray-100`}
                       >
-                        <td className="py-3 px-4 text-[12px] font-bold text-black">
+                        <td className="py-3 px-4 text-sm font-semibold text-gray-900">
                           {order.name}
                         </td>
-                        <td className="py-3 px-4 text-[12px] font-medium text-neutral-600">
+                        <td className="py-3 px-4 text-sm text-gray-600">
                           {order.phone}
                         </td>
                         <td
-                          className="py-3 px-4 text-[12px] font-medium text-neutral-500 truncate max-w-[200px]"
+                          className="py-3 px-4 text-sm text-gray-500 truncate max-w-[200px]"
                           title={order.address}
                         >
                           {order.address}
                         </td>
-                        <td className="py-3 px-4 text-[12px] font-mono font-bold text-black">
+                        <td className="py-3 px-4 text-sm font-mono font-semibold text-gray-900">
                           {order.pincode}
                         </td>
-                        <td className="py-3 px-4 text-[12px] font-mono text-neutral-500">
+                        <td className="py-3 px-4 text-sm font-mono text-gray-500">
                           {order.tagId}
                         </td>
-                        <td className="py-3 px-4 text-[12px] font-black text-black">
+                        <td className="py-3 px-4 text-sm font-bold text-gray-900">
                           ₹{order.amount}
                         </td>
                         <td className="py-3 px-4">
                           <span
-                            className={`px-2 py-0.5 rounded-sm text-[9px] font-bold uppercase tracking-widest border ${statusColors[order.paymentStatus] || ""}`}
+                            className={`px-2.5 py-0.5 rounded-full text-[10px] font-semibold ${statusColors[order.paymentStatus] || ""}`}
                           >
                             {order.paymentStatus}
                           </span>
@@ -576,7 +576,7 @@ export default function AdminDashboard() {
                             onChange={(e) =>
                               handleOrderStatus(order._id, e.target.value)
                             }
-                            className="text-[10px] font-bold uppercase tracking-widest bg-white border-2 border-neutral-200 rounded-sm px-2 py-1 cursor-pointer"
+                            className="text-xs font-medium bg-white border border-gray-200 rounded-lg px-2 py-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400/50"
                           >
                             <option value="processing">Processing</option>
                             <option value="shipped">Shipped</option>
@@ -584,7 +584,7 @@ export default function AdminDashboard() {
                             <option value="cancelled">Cancelled</option>
                           </select>
                         </td>
-                        <td className="py-3 px-4 text-[11px] text-neutral-400">
+                        <td className="py-3 px-4 text-sm text-gray-400">
                           {new Date(order.createdAt).toLocaleDateString()}
                         </td>
                       </tr>
@@ -594,8 +594,8 @@ export default function AdminDashboard() {
               </div>
               {filteredStickerOrders.length === 0 && (
                 <div className="py-16 text-center">
-                  <i className="ri-shopping-cart-line text-4xl text-neutral-200 mb-4 block"></i>
-                  <p className="text-neutral-400 text-[11px] font-bold uppercase tracking-widest">
+                  <i className="ri-shopping-cart-line text-4xl text-gray-200 mb-4 block"></i>
+                  <p className="text-gray-400 text-sm font-medium">
                     No orders yet
                   </p>
                 </div>
@@ -605,31 +605,31 @@ export default function AdminDashboard() {
 
           {/* Services Tab — ₹120 Plan Payments */}
           {activeTab === "services" && (
-            <div className="brutal-card overflow-hidden animate-fade-in-up">
-              <div className="bg-black px-5 py-3 flex items-center gap-3">
+            <div className="mm-card-lg overflow-hidden animate-fade-in-up">
+              <div className="bg-dark-blue px-5 py-3 flex items-center gap-3 rounded-t-2xl">
                 <i className="ri-global-fill text-cyan-400"></i>
-                <span className="text-[10px] font-bold text-neutral-400 tracking-widest">
-                  service payments — ₹120 online tag creation
+                <span className="text-xs font-medium text-gray-400">
+                  Service Payments — ₹120 Online Tag Creation
                 </span>
               </div>
               <div className="overflow-x-auto scrollbar-hide">
                 <table className="w-full min-w-[600px]">
                   <thead>
-                    <tr className="bg-neutral-50">
-                      <th className="text-left py-3 px-4 text-[10px] font-black tracking-widest text-neutral-500">
-                        user
+                    <tr className="bg-gray-50 border-b border-gray-100">
+                      <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                        User
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black tracking-widest text-neutral-500">
-                        tag id
+                      <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                        Tag ID
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black tracking-widest text-neutral-500">
-                        amount
+                      <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                        Amount
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black tracking-widest text-neutral-500">
-                        payment
+                      <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                        Payment
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black tracking-widest text-neutral-500">
-                        date
+                      <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                        Date
                       </th>
                     </tr>
                   </thead>
@@ -637,25 +637,25 @@ export default function AdminDashboard() {
                     {filteredServicePayments.map((p, i) => (
                       <tr
                         key={p._id}
-                        className={`${i % 2 === 0 ? "bg-white" : "bg-neutral-50"} border-b border-neutral-100`}
+                        className={`${i % 2 === 0 ? "bg-white" : "bg-gray-50"} border-b border-gray-100`}
                       >
-                        <td className="py-3 px-4 text-[12px] font-bold text-black">
+                        <td className="py-3 px-4 text-sm font-semibold text-gray-900">
                           {p.name}
                         </td>
-                        <td className="py-3 px-4 text-[12px] font-mono text-neutral-500">
+                        <td className="py-3 px-4 text-sm font-mono text-gray-500">
                           {p.tagId}
                         </td>
-                        <td className="py-3 px-4 text-[12px] font-black text-black">
+                        <td className="py-3 px-4 text-sm font-bold text-gray-900">
                           ₹{p.amount}
                         </td>
                         <td className="py-3 px-4">
                           <span
-                            className={`px-2 py-0.5 rounded-sm text-[9px] font-bold tracking-widest border ${statusColors[p.paymentStatus] || ""}`}
+                            className={`px-2.5 py-0.5 rounded-full text-[10px] font-semibold ${statusColors[p.paymentStatus] || ""}`}
                           >
                             {p.paymentStatus}
                           </span>
                         </td>
-                        <td className="py-3 px-4 text-[11px] text-neutral-400">
+                        <td className="py-3 px-4 text-sm text-gray-400">
                           {new Date(p.createdAt).toLocaleDateString()}
                         </td>
                       </tr>
@@ -665,9 +665,9 @@ export default function AdminDashboard() {
               </div>
               {filteredServicePayments.length === 0 && (
                 <div className="py-16 text-center">
-                  <i className="ri-global-line text-4xl text-neutral-200 mb-4 block"></i>
-                  <p className="text-neutral-400 text-sm font-medium">
-                    no service payments yet
+                  <i className="ri-global-line text-4xl text-gray-200 mb-4 block"></i>
+                  <p className="text-gray-400 text-sm font-medium">
+                    No service payments yet
                   </p>
                 </div>
               )}
@@ -677,11 +677,11 @@ export default function AdminDashboard() {
           {/* Shopkeepers Tab */}
           {activeTab === "shopkeepers" && (
             <div className="space-y-4 animate-fade-in-up">
-              <div className="brutal-card overflow-hidden">
-                <div className="bg-black px-5 py-3 flex items-center gap-3">
-                  <i className="ri-store-2-fill text-orange-400"></i>
-                  <span className="text-[10px] font-bold text-neutral-400 tracking-widest">
-                    registered shopkeepers — {shopkeepers.length} total
+              <div className="mm-card-lg overflow-hidden">
+                <div className="bg-dark-blue px-5 py-3 flex items-center gap-3 rounded-t-2xl">
+                  <i className="ri-store-2-fill text-yellow-400"></i>
+                  <span className="text-xs font-medium text-gray-400">
+                    Registered Shopkeepers — {shopkeepers.length} total
                   </span>
                 </div>
 
@@ -689,33 +689,33 @@ export default function AdminDashboard() {
                   <div className="overflow-x-auto scrollbar-hide">
                     <table className="w-full min-w-[800px]">
                       <thead>
-                        <tr className="bg-neutral-50 border-b-2 border-neutral-100">
-                          <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                            name
+                        <tr className="bg-gray-50 border-b border-gray-100">
+                          <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                            Name
                           </th>
-                          <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                            email
+                          <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                            Email
                           </th>
-                          <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                            code
+                          <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                            Code
                           </th>
-                          <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                            tags
+                          <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                            Tags
                           </th>
-                          <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                            referrals
+                          <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                            Referrals
                           </th>
-                          <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                            sales
+                          <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                            Sales
                           </th>
-                          <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                            earned
+                          <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                            Earned
                           </th>
-                          <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                            pending
+                          <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                            Pending
                           </th>
-                          <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                            action
+                          <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                            Action
                           </th>
                         </tr>
                       </thead>
@@ -723,32 +723,32 @@ export default function AdminDashboard() {
                         {shopkeepers.map((sk, i) => (
                           <tr
                             key={sk._id}
-                            className={`${i % 2 === 0 ? "bg-white" : "bg-neutral-50"} border-b border-neutral-100`}
+                            className={`${i % 2 === 0 ? "bg-white" : "bg-gray-50"} border-b border-gray-100`}
                           >
-                            <td className="py-3 px-4 text-[12px] font-bold text-black">
+                            <td className="py-3 px-4 text-sm font-semibold text-gray-900">
                               {sk.name}
                             </td>
-                            <td className="py-3 px-4 text-[12px] text-neutral-500">
+                            <td className="py-3 px-4 text-sm text-gray-500">
                               {sk.email}
                             </td>
-                            <td className="py-3 px-4 text-[12px] font-mono font-bold text-orange-600">
+                            <td className="py-3 px-4 text-sm font-mono font-bold text-yellow-600">
                               {sk.referralCode || "—"}
                             </td>
-                            <td className="py-3 px-4 text-[12px] font-bold text-black">
+                            <td className="py-3 px-4 text-sm font-bold text-gray-900">
                               {sk.tagsCount}
                             </td>
-                            <td className="py-3 px-4 text-[12px] font-bold text-blue-600">
+                            <td className="py-3 px-4 text-sm font-bold text-blue-600">
                               {sk.referralCount}
                             </td>
-                            <td className="py-3 px-4 text-[12px] font-bold text-black">
+                            <td className="py-3 px-4 text-sm font-bold text-gray-900">
                               ₹{sk.totalSales}
                             </td>
-                            <td className="py-3 px-4 text-[12px] font-bold text-green-600">
+                            <td className="py-3 px-4 text-sm font-bold text-green-600">
                               ₹{sk.totalCommission}
                             </td>
                             <td className="py-3 px-4">
                               <span
-                                className={`text-[10px] font-bold px-2 py-0.5 rounded-sm ${sk.pendingCommission > 0 ? "bg-yellow-100 text-yellow-700" : "bg-green-100 text-green-700"}`}
+                                className={`text-[10px] font-semibold px-2.5 py-0.5 rounded-full ${sk.pendingCommission > 0 ? "bg-yellow-100 text-yellow-700" : "bg-green-100 text-green-700"}`}
                               >
                                 ₹{sk.pendingCommission}
                               </span>
@@ -773,11 +773,11 @@ export default function AdminDashboard() {
                                       .finally(() => setSkCommLoading(false));
                                   }
                                 }}
-                                className="text-[10px] font-bold uppercase tracking-widest text-orange-600 hover:text-black transition-colors cursor-pointer"
+                                className="text-xs font-semibold text-yellow-600 hover:text-gray-900 transition-colors cursor-pointer"
                               >
                                 {expandedShopkeeper === sk._id
-                                  ? "close"
-                                  : "manage"}
+                                  ? "Close"
+                                  : "Manage"}
                               </button>
                             </td>
                           </tr>
@@ -787,9 +787,9 @@ export default function AdminDashboard() {
                   </div>
                 ) : (
                   <div className="py-16 text-center">
-                    <i className="ri-store-2-line text-4xl text-neutral-200 mb-4 block"></i>
-                    <p className="text-neutral-400 text-[11px] font-bold uppercase tracking-widest">
-                      no shopkeepers registered yet
+                    <i className="ri-store-2-line text-4xl text-gray-200 mb-4 block"></i>
+                    <p className="text-gray-400 text-sm font-medium">
+                      No shopkeepers registered yet
                     </p>
                   </div>
                 )}
@@ -797,12 +797,12 @@ export default function AdminDashboard() {
 
               {/* Expanded Shopkeeper Commissions */}
               {expandedShopkeeper && (
-                <div className="brutal-card overflow-hidden animate-fade-in-up">
-                  <div className="bg-green-600 px-5 py-3 flex items-center justify-between">
+                <div className="mm-card-lg overflow-hidden animate-fade-in-up">
+                  <div className="bg-green-600 px-5 py-3 flex items-center justify-between rounded-t-2xl">
                     <div className="flex items-center gap-3">
                       <i className="ri-wallet-3-fill text-white"></i>
-                      <span className="text-[10px] font-bold text-green-100 tracking-widest">
-                        commissions —{" "}
+                      <span className="text-xs font-medium text-green-100">
+                        Commissions —{" "}
                         {
                           shopkeepers.find((s) => s._id === expandedShopkeeper)
                             ?.name
@@ -814,9 +814,9 @@ export default function AdminDashboard() {
                         setExpandedShopkeeper(null);
                         setSkCommissions([]);
                       }}
-                      className="text-green-100 hover:text-white text-[10px] font-bold uppercase tracking-widest cursor-pointer"
+                      className="text-green-100 hover:text-white text-xs font-semibold cursor-pointer"
                     >
-                      <i className="ri-close-line text-sm"></i> close
+                      <i className="ri-close-line text-sm"></i> Close
                     </button>
                   </div>
 
@@ -828,30 +828,30 @@ export default function AdminDashboard() {
                     <div className="overflow-x-auto scrollbar-hide">
                       <table className="w-full min-w-[700px]">
                         <thead>
-                          <tr className="bg-neutral-50 border-b-2 border-neutral-100">
-                            <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                              type
+                          <tr className="bg-gray-50 border-b border-gray-100">
+                            <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                              Type
                             </th>
-                            <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                              tag
+                            <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                              Tag
                             </th>
-                            <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                              amount
+                            <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                              Amount
                             </th>
-                            <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                              earned
+                            <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                              Earned
                             </th>
-                            <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                              status
+                            <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                              Status
                             </th>
-                            <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                              payment note
+                            <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                              Payment Note
                             </th>
-                            <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                              date
+                            <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                              Date
                             </th>
-                            <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                              action
+                            <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400">
+                              Action
                             </th>
                           </tr>
                         </thead>
@@ -859,11 +859,11 @@ export default function AdminDashboard() {
                           {skCommissions.map((c, i) => (
                             <tr
                               key={c._id}
-                              className={`${i % 2 === 0 ? "bg-white" : "bg-neutral-50"} border-b border-neutral-100`}
+                              className={`${i % 2 === 0 ? "bg-white" : "bg-gray-50"} border-b border-gray-100`}
                             >
                               <td className="py-3 px-4">
                                 <span
-                                  className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-sm border-2 border-black ${
+                                  className={`text-[10px] font-semibold capitalize px-2.5 py-1 rounded-full ${
                                     c.type === "qr_creation"
                                       ? "bg-orange-100 text-orange-700"
                                       : c.type === "sticker_order"
@@ -876,10 +876,10 @@ export default function AdminDashboard() {
                                   {c.type.replace(/_/g, " ")}
                                 </span>
                               </td>
-                              <td className="py-3 px-4 text-sm font-mono font-bold text-black">
+                              <td className="py-3 px-4 text-sm font-mono font-semibold text-gray-900">
                                 {c.tagId || "—"}
                               </td>
-                              <td className="py-3 px-4 text-sm text-neutral-500">
+                              <td className="py-3 px-4 text-sm text-gray-500">
                                 ₹{c.amount}
                               </td>
                               <td className="py-3 px-4 text-sm font-bold text-green-600">
@@ -939,23 +939,23 @@ export default function AdminDashboard() {
                                       }
                                     } catch {}
                                   }}
-                                  className="text-[10px] font-bold uppercase tracking-widest bg-white border-2 border-neutral-200 rounded-sm px-2 py-1 cursor-pointer"
+                                  className="text-xs font-medium bg-white border border-gray-200 rounded-lg px-2 py-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400/50"
                                 >
                                   <option value="pending">Pending</option>
                                   <option value="paid">Paid</option>
                                 </select>
                               </td>
                               <td
-                                className="py-3 px-4 text-[11px] text-neutral-500 max-w-[150px] truncate"
+                                className="py-3 px-4 text-sm text-gray-500 max-w-[150px] truncate"
                                 title={c.paymentNote}
                               >
                                 {c.paymentNote || "—"}
                               </td>
-                              <td className="py-3 px-4 text-[11px] text-neutral-400">
+                              <td className="py-3 px-4 text-sm text-gray-400">
                                 {new Date(c.createdAt).toLocaleDateString()}
                                 {c.paidAt && (
                                   <span className="block text-green-600 text-[9px]">
-                                    paid{" "}
+                                    Paid{" "}
                                     {new Date(c.paidAt).toLocaleDateString()}
                                   </span>
                                 )}
@@ -984,9 +984,9 @@ export default function AdminDashboard() {
                                       })
                                       .catch(() => {});
                                   }}
-                                  className="text-[10px] font-bold text-orange-600 hover:text-black cursor-pointer uppercase tracking-widest"
+                                  className="text-xs font-semibold text-yellow-600 hover:text-gray-900 cursor-pointer"
                                 >
-                                  <i className="ri-edit-line"></i> note
+                                  <i className="ri-edit-line"></i> Note
                                 </button>
                               </td>
                             </tr>
@@ -996,8 +996,8 @@ export default function AdminDashboard() {
                     </div>
                   ) : (
                     <div className="py-8 text-center">
-                      <p className="text-neutral-400 text-sm font-medium">
-                        no commission entries for this shopkeeper
+                      <p className="text-gray-400 text-sm font-medium">
+                        No commission entries for this shopkeeper
                       </p>
                     </div>
                   )}
@@ -1008,21 +1008,21 @@ export default function AdminDashboard() {
 
           {/* Users Table (simple) */}
           {activeTab === "users" && (
-            <div className="brutal-card overflow-hidden animate-fade-in-up">
+            <div className="mm-card-lg overflow-hidden animate-fade-in-up">
               <div className="overflow-x-auto scrollbar-hide">
                 <table className="w-full min-w-[500px]">
                   <thead>
-                    <tr className="bg-black text-white">
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                    <tr className="bg-dark-blue text-white">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Name
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Email
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Role
                       </th>
-                      <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest">
+                      <th className="text-left py-3 px-4 text-xs font-semibold">
                         Joined
                       </th>
                     </tr>
@@ -1034,8 +1034,8 @@ export default function AdminDashboard() {
                   </tbody>
                 </table>
               </div>
-              <div className="py-10 text-center text-neutral-400 text-sm font-medium">
-                <p className="font-bold text-lg text-black mb-1">
+              <div className="py-10 text-center text-gray-400 text-sm font-medium">
+                <p className="font-extrabold text-lg text-gray-900 mb-1">
                   {stats?.totalUsers || 0} Users
                 </p>
                 <p>Total registered users on the platform</p>

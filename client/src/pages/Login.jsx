@@ -31,12 +31,12 @@ export default function Login() {
 
   return (
     <Layout>
-      <div className="bg-white min-h-screen flex items-center justify-center py-24 px-6">
+      <div className="bg-gradient-to-br from-gray-50 to-yellow-50/30 min-h-screen flex items-center justify-center py-24 px-6">
         <div className="w-full max-w-md">
           <div className="text-center mb-10">
             <Link
               to="/"
-              className="inline-block hover:-translate-y-px transition-all"
+              className="inline-block hover:-translate-y-0.5 transition-all"
             >
               <img
                 src="/logo.png"
@@ -44,33 +44,29 @@ export default function Login() {
                 className="h-10 w-auto mx-auto mb-6"
               />
             </Link>
-            <h1 className="text-3xl font-black text-black tracking-tight mb-2">
-              Login to <span className="text-orange-600">JankariTag</span>
+            <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-2">
+              Login to <span className="text-yellow-500">JankariTag</span>
             </h1>
-            <p className="text-neutral-500 text-sm font-medium">
-              Login to your account
-            </p>
+            <p className="text-gray-500 text-sm">Login to your account</p>
           </div>
 
           {error && (
-            <div className="bg-red-50 border-2 border-red-500 text-red-600 px-6 py-3 rounded-sm mb-6 flex items-center gap-3">
+            <div className="bg-red-50 border border-red-200 text-red-600 px-5 py-3 rounded-xl mb-6 flex items-center gap-3">
               <i className="ri-error-warning-fill text-lg"></i>
-              <span className="text-[11px] font-bold uppercase tracking-widest">
-                {error}
-              </span>
+              <span className="text-sm font-medium">{error}</span>
             </div>
           )}
 
           <form
             onSubmit={handleSubmit}
-            className="brutal-card p-8 md:p-10 space-y-6"
+            className="mm-card-lg p-8 md:p-10 space-y-6"
           >
-            <div className="space-y-3">
+            <div className="space-y-2">
               <label
                 htmlFor="email"
-                className="flex items-center gap-2 text-neutral-500 font-bold text-[11px] uppercase tracking-widest"
+                className="flex items-center gap-2 text-gray-600 font-medium text-sm"
               >
-                <i className="ri-mail-line text-orange-600"></i> Email Address
+                <i className="ri-mail-line text-yellow-500"></i> Email Address
               </label>
               <input
                 type="email"
@@ -79,16 +75,16 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="your@email.com"
-                className="input-brutal"
+                className="input-mm"
               />
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-2">
               <label
                 htmlFor="password"
-                className="flex items-center gap-2 text-neutral-500 font-bold text-[11px] uppercase tracking-widest"
+                className="flex items-center gap-2 text-gray-600 font-medium text-sm"
               >
-                <i className="ri-lock-2-line text-orange-600"></i> Password
+                <i className="ri-lock-2-line text-yellow-500"></i> Password
               </label>
               <input
                 type="password"
@@ -97,14 +93,14 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="••••••••"
-                className="input-brutal"
+                className="input-mm"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="btn-brutal btn-brutal-primary w-full py-4 disabled:opacity-50"
+              className="btn-mm btn-mm-primary w-full py-3.5 disabled:opacity-50"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-3">
@@ -119,11 +115,11 @@ export default function Login() {
             </button>
 
             <div className="pt-2 text-center">
-              <p className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest">
+              <p className="text-sm text-gray-400">
                 New user?{" "}
                 <Link
                   to="/register"
-                  className="text-orange-600 hover:text-black transition-colors underline underline-offset-4 decoration-2"
+                  className="text-yellow-600 hover:text-yellow-700 transition-colors font-semibold"
                 >
                   Create Account
                 </Link>

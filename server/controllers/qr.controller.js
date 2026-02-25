@@ -1,7 +1,7 @@
 const { generateQRCodeWithCard } = require("../services/qr.service");
 const { uploadBase64Image } = require("../services/upload.service");
 const Qrinfo = require("../models/qrinfo.models");
-
+const dotenv = require("dotenv/config");
 async function generateQR(req, res) {
   try {
     // 1️⃣ Get ID from query
@@ -23,7 +23,7 @@ async function generateQR(req, res) {
     }
 
     // 3️⃣ Data that will go inside QR
-    const qr_send_data = `https://disloyal-poem.outray.app/data?id=${id}`;
+    const qr_send_data = `${process.env.FRONTEND_URL}/data?id=${id}`;
 
     // 4️⃣ Data that will be printed on card
     const userInfo = {

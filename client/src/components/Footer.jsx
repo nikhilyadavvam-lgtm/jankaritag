@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t-2 border-black">
+    <footer className="bg-gray-50 border-t border-gray-100">
       {/* Main Footer */}
       <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-1 space-y-4">
             <Link to="/" className="flex items-center gap-3 group">
-              <div className="bg-black rounded-sm flex items-center justify-center transition-all group-hover:-translate-y-px">
+              <div className="rounded-lg flex items-center justify-center transition-all group-hover:-translate-y-0.5">
                 <img
                   src="/logo.png"
                   alt="JankariTag Logo"
@@ -17,7 +17,7 @@ export default function Footer() {
                 />
               </div>
             </Link>
-            <p className="text-neutral-500 text-sm font-medium leading-relaxed">
+            <p className="text-gray-500 text-sm leading-relaxed">
               Smart QR tags for your belongings. Create a tag, print the
               sticker, and stay connected.
             </p>
@@ -30,7 +30,7 @@ export default function Footer() {
                 <a
                   key={i}
                   href={social.link}
-                  className="w-10 h-10 rounded-sm bg-white hover:bg-orange-600 text-black hover:text-white flex items-center justify-center transition-all border-2 border-black hover:-translate-y-px"
+                  className="w-10 h-10 rounded-xl bg-white hover:bg-yellow-400 text-gray-500 hover:text-gray-900 flex items-center justify-center transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
                 >
                   <i className={`${social.icon} text-base`}></i>
                 </a>
@@ -40,14 +40,14 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="md:ml-auto">
-            <h4 className="text-black font-bold text-[11px] uppercase tracking-[0.15em] mb-5">
+            <h4 className="text-gray-800 font-semibold text-sm mb-5">
               Quick Links
             </h4>
             <ul className="space-y-3">
               <li>
                 <Link
                   to="/"
-                  className="text-sm text-neutral-500 hover:text-orange-600 transition-colors font-medium"
+                  className="text-sm text-gray-500 hover:text-yellow-600 transition-colors"
                 >
                   Home
                 </Link>
@@ -55,7 +55,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/qrinfoupload"
-                  className="text-sm text-neutral-500 hover:text-orange-600 transition-colors font-medium"
+                  className="text-sm text-gray-500 hover:text-yellow-600 transition-colors"
                 >
                   Create Tag
                 </Link>
@@ -63,7 +63,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/profile"
-                  className="text-sm text-neutral-500 hover:text-orange-600 transition-colors font-medium"
+                  className="text-sm text-gray-500 hover:text-yellow-600 transition-colors"
                 >
                   My Tags
                 </Link>
@@ -73,14 +73,12 @@ export default function Footer() {
 
           {/* Legal */}
           <div className="md:ml-auto">
-            <h4 className="text-black font-bold text-[11px] uppercase tracking-[0.15em] mb-5">
-              Legal
-            </h4>
+            <h4 className="text-gray-800 font-semibold text-sm mb-5">Legal</h4>
             <ul className="space-y-3">
               <li>
                 <Link
                   to="/privacy"
-                  className="text-sm text-neutral-500 hover:text-orange-600 transition-colors font-medium"
+                  className="text-sm text-gray-500 hover:text-yellow-600 transition-colors"
                 >
                   Privacy Policy
                 </Link>
@@ -88,7 +86,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/terms"
-                  className="text-sm text-neutral-500 hover:text-orange-600 transition-colors font-medium"
+                  className="text-sm text-gray-500 hover:text-yellow-600 transition-colors"
                 >
                   Terms & Conditions
                 </Link>
@@ -98,20 +96,20 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="md:ml-auto">
-            <h4 className="text-black font-bold text-[11px] uppercase tracking-[0.15em] mb-5">
+            <h4 className="text-gray-800 font-semibold text-sm mb-5">
               Contact Us
             </h4>
             <ul className="space-y-3">
-              <li className="flex items-center gap-3 text-sm text-neutral-500">
-                <i className="ri-phone-fill text-orange-600 text-base"></i> +91
+              <li className="flex items-center gap-3 text-sm text-gray-500">
+                <i className="ri-phone-fill text-yellow-500 text-base"></i> +91
                 96674 46393
               </li>
-              <li className="flex items-center gap-3 text-sm text-neutral-500">
-                <i className="ri-mail-fill text-orange-600 text-base"></i>{" "}
+              <li className="flex items-center gap-3 text-sm text-gray-500">
+                <i className="ri-mail-fill text-yellow-500 text-base"></i>{" "}
                 support@jankaritag.com
               </li>
-              <li className="flex items-center gap-3 text-sm text-neutral-500">
-                <i className="ri-map-pin-2-fill text-orange-600 text-base"></i>{" "}
+              <li className="flex items-center gap-3 text-sm text-gray-500">
+                <i className="ri-map-pin-2-fill text-yellow-500 text-base"></i>{" "}
                 New Delhi, India
               </li>
             </ul>
@@ -120,14 +118,14 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t-2 border-black py-5 bg-black">
+      <div className="border-t border-gray-200 py-5 bg-dark-blue">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3">
-          <p className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest">
+          <p className="text-xs text-gray-400">
             &copy; {new Date().getFullYear()} JankariTag • All Rights Reserved
           </p>
-          <div className="flex items-center gap-2 text-[11px] font-bold text-neutral-400 uppercase tracking-widest">
-            Made in <span className="text-white font-black ml-1">India</span>{" "}
-            <i className="ri-heart-fill text-orange-600 ml-1"></i>
+          <div className="flex items-center gap-2 text-xs text-gray-400">
+            Made in <span className="text-white font-semibold ml-1">India</span>{" "}
+            <i className="ri-heart-fill text-yellow-400 ml-1"></i>
           </div>
         </div>
       </div>

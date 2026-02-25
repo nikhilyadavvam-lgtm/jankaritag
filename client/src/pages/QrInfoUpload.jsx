@@ -71,7 +71,6 @@ export default function QrInfoUpload() {
     setLoading(true);
     setError("");
 
-    // Shopkeeper must provide customer email
     if (user?.role === "shopkeeper" && !form.customerEmail.trim()) {
       setError("Please enter customer's email address");
       setLoading(false);
@@ -129,7 +128,7 @@ export default function QrInfoUpload() {
             email: user?.email || "",
             contact: form.phone || "",
           },
-          theme: { color: "#ea580c" },
+          theme: { color: "#eab308" },
         };
 
         const rzp = new window.Razorpay(options);
@@ -151,7 +150,7 @@ export default function QrInfoUpload() {
     return (
       <Layout>
         <div className="min-h-screen bg-white flex items-center justify-center">
-          <i className="ri-loader-4-line animate-spin text-4xl text-orange-600"></i>
+          <i className="ri-loader-4-line animate-spin text-4xl text-yellow-500"></i>
         </div>
       </Layout>
     );
@@ -159,30 +158,30 @@ export default function QrInfoUpload() {
   if (!user)
     return (
       <Layout>
-        <div className="bg-white min-h-screen flex items-center justify-center py-24 px-4">
-          <div className="brutal-card p-8 md:p-14 max-w-md w-full text-center">
-            <div className="w-20 h-20 rounded-sm bg-neutral-100 flex items-center justify-center mx-auto mb-8 border-2 border-black">
-              <i className="ri-lock-2-fill text-4xl text-orange-600"></i>
+        <div className="bg-gradient-to-br from-gray-50 to-yellow-50/30 min-h-screen flex items-center justify-center py-24 px-4">
+          <div className="mm-card-lg p-8 md:p-14 max-w-md w-full text-center">
+            <div className="w-20 h-20 rounded-2xl bg-yellow-50 flex items-center justify-center mx-auto mb-8">
+              <i className="ri-lock-2-fill text-4xl text-yellow-500"></i>
             </div>
-            <h2 className="text-2xl font-black text-black tracking-tight mb-3">
-              login required
+            <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight mb-3">
+              Login Required
             </h2>
-            <p className="text-neutral-500 text-sm font-medium mb-6 leading-relaxed">
-              please login to create your QR tag
+            <p className="text-gray-500 text-sm mb-6 leading-relaxed">
+              Please login to create your QR tag
             </p>
             <Link
               to="/login"
-              className="btn-brutal btn-brutal-primary w-full py-3 text-[11px] mb-6"
+              className="btn-mm btn-mm-primary w-full py-3 text-sm mb-6"
             >
-              login <i className="ri-arrow-right-line"></i>
+              Login <i className="ri-arrow-right-line"></i>
             </Link>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400">
-              new here?{" "}
+            <p className="text-sm text-gray-400">
+              New here?{" "}
               <Link
                 to="/register"
-                className="text-orange-600 hover:text-black transition-colors underline decoration-2 underline-offset-4"
+                className="text-yellow-600 hover:text-yellow-700 transition-colors font-semibold"
               >
-                sign up
+                Sign Up
               </Link>
             </p>
           </div>
@@ -195,25 +194,25 @@ export default function QrInfoUpload() {
       <div className="bg-white min-h-screen py-20 md:py-24 px-4 md:px-6">
         <div className="max-w-2xl mx-auto">
           {/* Header */}
-          <div className="mb-10 md:mb-16">
+          <div className="mb-10 md:mb-14">
             <button
               onClick={() => navigate("/")}
-              className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-6 group cursor-pointer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-gray-700 transition-colors mb-6 group cursor-pointer"
             >
               <i className="ri-arrow-left-s-line text-lg group-hover:-translate-x-1 transition-transform"></i>{" "}
-              back to home
+              Back to Home
             </button>
             <div className="flex items-center gap-4 md:gap-6">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-sm bg-orange-600 flex items-center justify-center border-2 border-black shadow-[4px_4px_0px_#0D0D0D] shrink-0">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-yellow-100 flex items-center justify-center shadow-sm shrink-0">
                 <i
-                  className={`${currentLabels.icon} text-2xl md:text-3xl text-white`}
+                  className={`${currentLabels.icon} text-2xl md:text-3xl text-yellow-600`}
                 ></i>
               </div>
               <div>
-                <h1 className="text-2xl md:text-4xl font-black text-black tracking-tight leading-none mb-1">
+                <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900 tracking-tight leading-none mb-1">
                   {currentLabels.title}
                 </h1>
-                <p className="text-neutral-500 font-medium text-xs md:text-sm">
+                <p className="text-gray-500 text-xs md:text-sm">
                   {currentLabels.desc}
                 </p>
               </div>
@@ -221,17 +220,17 @@ export default function QrInfoUpload() {
           </div>
 
           {/* Pricing Info */}
-          <div className="brutal-card p-4 md:p-5 mb-6 bg-orange-50 border-orange-600">
+          <div className="mm-card p-4 md:p-5 mb-6 bg-yellow-50 border-yellow-200">
             <div className="flex items-center gap-3 md:gap-4">
-              <div className="w-10 h-10 md:w-12 md:h-12 min-w-10 rounded-sm bg-orange-600 flex items-center justify-center border-2 border-black">
-                <i className="ri-money-rupee-circle-fill text-xl md:text-2xl text-white"></i>
+              <div className="w-10 h-10 md:w-12 md:h-12 min-w-10 rounded-xl bg-yellow-400 flex items-center justify-center">
+                <i className="ri-money-rupee-circle-fill text-xl md:text-2xl text-gray-900"></i>
               </div>
               <div>
-                <p className="font-black text-black text-sm">
-                  online service — ₹120 per tag
+                <p className="font-bold text-gray-900 text-sm">
+                  Online Service — ₹120 per tag
                 </p>
-                <p className="text-[11px] text-neutral-500 font-medium">
-                  includes QR code + online tracking. payment via razorpay.
+                <p className="text-xs text-gray-500">
+                  Includes QR code + online tracking. Payment via Razorpay.
                 </p>
               </div>
             </div>
@@ -239,17 +238,17 @@ export default function QrInfoUpload() {
 
           {/* Shopkeeper commission info */}
           {isShopkeeper && (
-            <div className="brutal-card p-4 md:p-5 mb-6 bg-green-50 border-green-600">
+            <div className="mm-card p-4 md:p-5 mb-6 bg-green-50 border-green-200">
               <div className="flex items-center gap-3 md:gap-4">
-                <div className="w-10 h-10 md:w-12 md:h-12 min-w-10 rounded-sm bg-green-600 flex items-center justify-center border-2 border-black">
+                <div className="w-10 h-10 md:w-12 md:h-12 min-w-10 rounded-xl bg-green-500 flex items-center justify-center">
                   <i className="ri-percent-fill text-xl md:text-2xl text-white"></i>
                 </div>
                 <div>
-                  <p className="font-black text-black text-sm">
-                    shopkeeper — 5% commission
+                  <p className="font-bold text-gray-900 text-sm">
+                    Shopkeeper — 5% Commission
                   </p>
-                  <p className="text-[11px] text-neutral-500 font-medium">
-                    you earn 5% on every tag you create for customers. up to 49
+                  <p className="text-xs text-gray-500">
+                    You earn 5% on every tag you create for customers. Up to 49
                     tags/month.
                   </p>
                 </div>
@@ -258,32 +257,30 @@ export default function QrInfoUpload() {
           )}
 
           {error && (
-            <div className="bg-red-50 border-2 border-red-500 text-red-600 px-4 md:px-6 py-3 rounded-sm mb-6 flex items-center gap-3">
+            <div className="bg-red-50 border border-red-200 text-red-600 px-4 md:px-5 py-3 rounded-xl mb-6 flex items-center gap-3">
               <i className="ri-error-warning-fill text-lg"></i>
-              <span className="text-[11px] font-bold uppercase tracking-widest">
-                {error}
-              </span>
+              <span className="text-sm font-medium">{error}</span>
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-8">
-            <div className="brutal-card p-6 md:p-10 space-y-6">
+            <div className="mm-card-lg p-6 md:p-10 space-y-6">
               {/* Shopkeeper: Customer Email */}
               {isShopkeeper && (
-                <div className="bg-yellow-50 border-2 border-yellow-400 rounded-sm p-4 md:p-5 space-y-3">
+                <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 md:p-5 space-y-3">
                   <div className="flex items-center gap-2 mb-1">
                     <i className="ri-user-received-fill text-yellow-600 text-lg"></i>
-                    <span className="font-black text-sm text-black">
-                      customer details
+                    <span className="font-bold text-sm text-gray-900">
+                      Customer Details
                     </span>
                   </div>
-                  <p className="text-[11px] text-neutral-500 font-medium">
-                    enter the customer's email so they can login and manage
+                  <p className="text-xs text-gray-500">
+                    Enter the customer's email so they can login and manage
                     their tag, update details, and order stickers.
                   </p>
                   <div className="space-y-2">
-                    <label className="text-[11px] font-bold text-neutral-500 tracking-wide">
-                      customer email <span className="text-red-500">*</span>
+                    <label className="text-sm font-medium text-gray-600">
+                      Customer Email <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="email"
@@ -292,25 +289,25 @@ export default function QrInfoUpload() {
                       onChange={handleChange}
                       required={isShopkeeper}
                       placeholder="customer@email.com"
-                      className="input-brutal"
+                      className="input-mm"
                     />
                   </div>
                 </div>
               )}
 
-              {/* Asset Details */}
+              {/* Asset Details Header */}
               <div className="flex items-center gap-3 pb-2">
-                <div className="w-10 h-10 rounded-sm bg-neutral-100 border-2 border-neutral-200 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center">
                   <i
-                    className={`${currentLabels.icon} text-orange-600 text-lg`}
+                    className={`${currentLabels.icon} text-yellow-500 text-lg`}
                   ></i>
                 </div>
                 <div>
-                  <h3 className="font-black text-black text-sm">
+                  <h3 className="font-bold text-gray-900 text-sm">
                     {form.category.toLowerCase().replace(/_/g, " ")} details
                   </h3>
-                  <p className="text-[10px] text-neutral-400 font-medium">
-                    fill in the info for your{" "}
+                  <p className="text-xs text-gray-400">
+                    Fill in the info for your{" "}
                     {form.category.toLowerCase().replace(/_/g, " ")} tag
                   </p>
                 </div>
@@ -318,8 +315,8 @@ export default function QrInfoUpload() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
                 <div className="space-y-2">
-                  <label className="text-[11px] font-bold text-neutral-500 tracking-wide">
-                    tag id <span className="text-red-500">*</span>
+                  <label className="text-sm font-medium text-gray-600">
+                    Tag ID <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -328,15 +325,15 @@ export default function QrInfoUpload() {
                     onChange={handleChange}
                     required
                     placeholder="e.g. VH-101"
-                    className="input-brutal"
+                    className="input-mm"
                   />
-                  <p className="text-[9px] text-neutral-400 font-medium">
-                    unique id printed on the physical tag
+                  <p className="text-xs text-gray-400">
+                    Unique ID printed on the physical tag
                   </p>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[11px] font-bold text-neutral-500 tracking-wide">
+                  <label className="text-sm font-medium text-gray-600">
                     {currentLabels.ownerLabel}
                   </label>
                   <input
@@ -345,13 +342,13 @@ export default function QrInfoUpload() {
                     value={form.name}
                     onChange={handleChange}
                     placeholder={currentLabels.ownerLabel.toLowerCase()}
-                    className="input-brutal"
+                    className="input-mm"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[11px] font-bold text-neutral-500 tracking-wide">
-                    location <span className="text-red-500">*</span>
+                  <label className="text-sm font-medium text-gray-600">
+                    Location <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -359,29 +356,29 @@ export default function QrInfoUpload() {
                     value={form.location}
                     onChange={handleChange}
                     required
-                    placeholder="e.g. parking lot B"
-                    className="input-brutal"
+                    placeholder="e.g. Parking Lot B"
+                    className="input-mm"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[11px] font-bold text-neutral-500 tracking-wide">
-                    contact number
+                  <label className="text-sm font-medium text-gray-600">
+                    Contact Number
                   </label>
                   <input
                     type="text"
                     name="phone"
                     value={form.phone}
                     onChange={handleChange}
-                    placeholder="emergency contact"
-                    className="input-brutal"
+                    placeholder="Emergency contact"
+                    className="input-mm"
                   />
                 </div>
               </div>
 
               {/* Additional Info */}
               <div className="space-y-2">
-                <label className="text-[11px] font-bold text-neutral-500 tracking-wide">
+                <label className="text-sm font-medium text-gray-600">
                   {currentLabels.infoLabel}
                 </label>
                 <textarea
@@ -390,7 +387,7 @@ export default function QrInfoUpload() {
                   onChange={handleChange}
                   rows={3}
                   placeholder={currentLabels.infoPlaceholder}
-                  className="input-brutal resize-none"
+                  className="input-mm resize-none"
                 />
               </div>
 
@@ -398,25 +395,25 @@ export default function QrInfoUpload() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="btn-brutal btn-brutal-primary w-full py-4 md:py-5 disabled:opacity-50 cursor-pointer"
+                  className="btn-mm btn-mm-accent w-full py-4 md:py-5 disabled:opacity-50 cursor-pointer text-base"
                 >
                   <div className="flex items-center justify-center gap-3">
                     {loading ? (
                       <>
                         <i className="ri-loader-line animate-spin text-lg"></i>{" "}
-                        processing...
+                        Processing...
                       </>
                     ) : (
                       <>
-                        <i className="ri-bank-card-fill text-lg"></i> pay ₹120 &
-                        create tag
+                        <i className="ri-bank-card-fill text-lg"></i> Pay ₹120 &
+                        Create Tag
                       </>
                     )}
                   </div>
                 </button>
-                <p className="text-center text-[9px] text-neutral-400 font-bold uppercase tracking-widest mt-3">
-                  <i className="ri-lock-fill mr-1"></i> secure payment via
-                  razorpay
+                <p className="text-center text-xs text-gray-400 mt-3">
+                  <i className="ri-lock-fill mr-1"></i> Secure payment via
+                  Razorpay
                 </p>
               </div>
             </div>

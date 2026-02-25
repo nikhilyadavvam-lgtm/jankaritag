@@ -40,12 +40,12 @@ export default function Register() {
 
   return (
     <Layout>
-      <div className="bg-white min-h-screen flex items-center justify-center py-24 px-6">
+      <div className="bg-gradient-to-br from-gray-50 to-yellow-50/30 min-h-screen flex items-center justify-center py-24 px-6">
         <div className="w-full max-w-md">
           <div className="text-center mb-10">
             <Link
               to="/"
-              className="inline-block hover:-translate-y-px transition-all"
+              className="inline-block hover:-translate-y-0.5 transition-all"
             >
               <img
                 src="/logo.png"
@@ -53,10 +53,10 @@ export default function Register() {
                 className="h-10 w-auto mx-auto mb-6"
               />
             </Link>
-            <h1 className="text-3xl font-black text-black tracking-tight mb-2">
-              Join <span className="text-orange-600">JankariTag</span>
+            <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-2">
+              Join <span className="text-yellow-500">JankariTag</span>
             </h1>
-            <p className="text-neutral-500 text-sm font-medium">
+            <p className="text-gray-500 text-sm">
               Create your free account to get started
             </p>
           </div>
@@ -66,10 +66,10 @@ export default function Register() {
             <button
               type="button"
               onClick={() => setIsShopkeeper(false)}
-              className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-sm text-[11px] font-bold uppercase tracking-widest border-2 transition-all cursor-pointer ${
+              className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
                 !isShopkeeper
-                  ? "bg-black text-white border-black"
-                  : "bg-white text-neutral-500 border-neutral-200 hover:border-black"
+                  ? "text-white bg-dark-blue shadow-md"
+                  : "bg-gray-50 text-gray-500 hover:bg-gray-100"
               }`}
             >
               <i className="ri-user-fill text-sm"></i> Normal User
@@ -77,10 +77,10 @@ export default function Register() {
             <button
               type="button"
               onClick={() => setIsShopkeeper(true)}
-              className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-sm text-[11px] font-bold uppercase tracking-widest border-2 transition-all cursor-pointer ${
+              className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
                 isShopkeeper
-                  ? "bg-orange-600 text-white border-orange-600"
-                  : "bg-white text-neutral-500 border-neutral-200 hover:border-orange-600"
+                  ? "bg-yellow-400 text-gray-900 shadow-md"
+                  : "bg-gray-50 text-gray-500 hover:bg-yellow-50"
               }`}
             >
               <i className="ri-store-2-fill text-sm"></i> Shopkeeper
@@ -89,29 +89,29 @@ export default function Register() {
 
           {/* Shopkeeper Benefits */}
           {isShopkeeper && (
-            <div className="brutal-card p-4 mb-6 bg-orange-50 border-orange-600 animate-fade-in-up">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-orange-600 mb-2">
+            <div className="mm-card p-5 mb-6 bg-yellow-50 border-yellow-200 animate-fade-in-up">
+              <p className="text-xs font-semibold text-yellow-700 mb-2">
                 <i className="ri-information-fill mr-1"></i> Shopkeeper Benefits
               </p>
-              <ul className="space-y-1.5 text-[12px] text-neutral-600 font-medium">
+              <ul className="space-y-1.5 text-sm text-gray-600">
                 <li className="flex items-center gap-2">
-                  <i className="ri-checkbox-circle-fill text-orange-600 text-sm"></i>{" "}
+                  <i className="ri-checkbox-circle-fill text-yellow-500 text-sm"></i>{" "}
                   49 QR codes per month
                 </li>
                 <li className="flex items-center gap-2">
-                  <i className="ri-checkbox-circle-fill text-orange-600 text-sm"></i>{" "}
+                  <i className="ri-checkbox-circle-fill text-yellow-500 text-sm"></i>{" "}
                   Stick JTag on customer vehicles
                 </li>
                 <li className="flex items-center gap-2">
-                  <i className="ri-checkbox-circle-fill text-orange-600 text-sm"></i>{" "}
+                  <i className="ri-checkbox-circle-fill text-yellow-500 text-sm"></i>{" "}
                   Earn 5% commission on sales
                 </li>
                 <li className="flex items-center gap-2">
-                  <i className="ri-checkbox-circle-fill text-orange-600 text-sm"></i>{" "}
+                  <i className="ri-checkbox-circle-fill text-yellow-500 text-sm"></i>{" "}
                   Save on sticker printing & delivery
                 </li>
                 <li className="flex items-center gap-2">
-                  <i className="ri-checkbox-circle-fill text-orange-600 text-sm"></i>{" "}
+                  <i className="ri-checkbox-circle-fill text-yellow-500 text-sm"></i>{" "}
                   Get your unique referral code
                 </li>
               </ul>
@@ -119,24 +119,22 @@ export default function Register() {
           )}
 
           {error && (
-            <div className="bg-red-50 border-2 border-red-500 text-red-600 px-6 py-3 rounded-sm mb-6 flex items-center gap-3">
+            <div className="bg-red-50 border border-red-200 text-red-600 px-5 py-3 rounded-xl mb-6 flex items-center gap-3">
               <i className="ri-error-warning-fill text-lg"></i>
-              <span className="text-[11px] font-bold uppercase tracking-widest">
-                {error}
-              </span>
+              <span className="text-sm font-medium">{error}</span>
             </div>
           )}
 
           <form
             onSubmit={handleSubmit}
-            className="brutal-card p-8 md:p-10 space-y-5"
+            className="mm-card-lg p-8 md:p-10 space-y-5"
           >
             <div className="space-y-2">
               <label
                 htmlFor="name"
-                className="flex items-center gap-2 text-neutral-500 font-bold text-[11px] uppercase tracking-widest"
+                className="flex items-center gap-2 text-gray-600 font-medium text-sm"
               >
-                <i className="ri-user-line text-orange-600"></i>{" "}
+                <i className="ri-user-line text-yellow-500"></i>{" "}
                 {isShopkeeper ? "Shop / Business Name" : "Full Name"}
               </label>
               <input
@@ -146,16 +144,16 @@ export default function Register() {
                 onChange={(e) => setName(e.target.value)}
                 required
                 placeholder={isShopkeeper ? "Your shop name" : "Your full name"}
-                className="input-brutal"
+                className="input-mm"
               />
             </div>
 
             <div className="space-y-2">
               <label
                 htmlFor="email"
-                className="flex items-center gap-2 text-neutral-500 font-bold text-[11px] uppercase tracking-widest"
+                className="flex items-center gap-2 text-gray-600 font-medium text-sm"
               >
-                <i className="ri-mail-line text-orange-600"></i> Email Address
+                <i className="ri-mail-line text-yellow-500"></i> Email Address
               </label>
               <input
                 type="email"
@@ -164,16 +162,16 @@ export default function Register() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="your@email.com"
-                className="input-brutal"
+                className="input-mm"
               />
             </div>
 
             <div className="space-y-2">
               <label
                 htmlFor="password"
-                className="flex items-center gap-2 text-neutral-500 font-bold text-[11px] uppercase tracking-widest"
+                className="flex items-center gap-2 text-gray-600 font-medium text-sm"
               >
-                <i className="ri-lock-2-line text-orange-600"></i> Password
+                <i className="ri-lock-2-line text-yellow-500"></i> Password
               </label>
               <input
                 type="password"
@@ -183,18 +181,18 @@ export default function Register() {
                 required
                 minLength={6}
                 placeholder="Min. 6 characters"
-                className="input-brutal"
+                className="input-mm"
               />
             </div>
 
-            {/* Referral Code (optional, for any user) */}
+            {/* Referral Code */}
             <div className="space-y-2">
               <label
                 htmlFor="referral"
-                className="flex items-center gap-2 text-neutral-500 font-bold text-[11px] uppercase tracking-widest"
+                className="flex items-center gap-2 text-gray-600 font-medium text-sm"
               >
-                <i className="ri-gift-fill text-orange-600"></i> Referral Code{" "}
-                <span className="text-neutral-300 normal-case">(optional)</span>
+                <i className="ri-gift-fill text-yellow-500"></i> Referral Code{" "}
+                <span className="text-gray-300">(optional)</span>
               </label>
               <input
                 type="text"
@@ -202,7 +200,7 @@ export default function Register() {
                 value={referralCode}
                 onChange={(e) => setReferralCode(e.target.value.toUpperCase())}
                 placeholder="Enter referral code"
-                className="input-brutal font-mono"
+                className="input-mm font-mono"
                 maxLength={10}
               />
             </div>
@@ -210,10 +208,10 @@ export default function Register() {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-4 rounded-sm font-bold text-[11px] uppercase tracking-widest border-2 disabled:opacity-50 cursor-pointer transition-all ${
+              className={`w-full py-3.5 rounded-xl font-semibold text-sm disabled:opacity-50 cursor-pointer transition-all ${
                 isShopkeeper
-                  ? "bg-orange-600 text-white border-orange-600 hover:bg-black hover:border-black"
-                  : "btn-brutal btn-brutal-primary"
+                  ? "bg-yellow-400 text-gray-900 hover:bg-yellow-500 shadow-sm"
+                  : "btn-mm btn-mm-primary"
               }`}
             >
               {loading ? (
@@ -232,11 +230,11 @@ export default function Register() {
             </button>
 
             <div className="pt-2 text-center">
-              <p className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest">
+              <p className="text-sm text-gray-400">
                 Already have an account?{" "}
                 <Link
                   to="/login"
-                  className="text-orange-600 hover:text-black transition-colors underline underline-offset-4 decoration-2"
+                  className="text-yellow-600 hover:text-yellow-700 transition-colors font-semibold"
                 >
                   Login Now
                 </Link>

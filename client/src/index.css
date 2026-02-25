@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
-/* ─── Neo-Brutalist Design System ──────────────── */
+/* ─── Modern Minimalist Design System ────────── */
 
-/* ─── Reset & Base ──────────────────────────────── */
+/* ─── Custom Fonts ───────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+/* ─── Reset & Base ───────────────────────────── */
 * {
   box-sizing: border-box;
 }
@@ -12,73 +15,105 @@ html {
 }
 
 body {
-  @apply bg-white text-black;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  @apply bg-white text-gray-800;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Brutalist Cards ────────────────────────────── */
-.brutal-card {
-  @apply bg-white border-2 border-black rounded-sm shadow-[4px_4px_0px_#0D0D0D] transition-all duration-300;
+/* ─── Color Reference ────────────────────────── */
+/* Primary Yellow: yellow-400 (#facc15) / yellow-500 (#eab308) */
+/* Dark Blue:      #1e3a5f                                      */
+/* Grays:          gray-50 → gray-900                            */
+
+/* ─── Cards ──────────────────────────────────── */
+.mm-card {
+  @apply bg-white rounded-xl shadow-md border border-gray-100 transition-all duration-300;
 }
 
-.brutal-card:hover {
-  @apply shadow-[4px_4px_0px_#0D0D0D];
+.mm-card:hover {
+  @apply shadow-lg;
 }
 
-.brutal-card-lg {
-  @apply bg-white border-2 border-black rounded-sm shadow-[8px_8px_0px_#000] transition-all duration-300;
+.mm-card-lg {
+  @apply bg-white rounded-2xl shadow-lg border border-gray-100 transition-all duration-300;
 }
 
-.brutal-card-lg:hover {
-  @apply shadow-[10px_10px_0px_#000] -translate-x-[2px] -translate-y-[2px];
+.mm-card-lg:hover {
+  @apply shadow-xl -translate-y-0.5;
 }
 
-/* ─── Buttons ────────────────────────────────────── */
-.btn-brutal {
-  @apply inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-sm font-bold uppercase tracking-widest text-[11px] border-2 transition-all duration-200 cursor-pointer;
+/* ─── Buttons ────────────────────────────────── */
+.btn-mm {
+  @apply inline-flex items-center justify-center gap-2.5 px-7 py-3 rounded-lg font-semibold text-sm tracking-wide transition-all duration-200 cursor-pointer;
 }
 
-.btn-brutal:hover {
-  @apply -translate-y-px;
+.btn-mm:hover {
+  @apply -translate-y-0.5 shadow-md;
 }
 
-.btn-brutal-primary {
-  @apply bg-black text-white border-black;
+.btn-mm-primary {
+  @apply text-white;
+  background-color: #1e3a5f;
 }
 
-.btn-brutal-primary:hover {
-  @apply bg-orange-600 border-orange-600;
+.btn-mm-primary:hover {
+  background-color: #16304f;
 }
 
-.btn-brutal-secondary {
-  @apply bg-white text-black border-black;
+.btn-mm-secondary {
+  @apply bg-white text-gray-700 border border-gray-200;
 }
 
-.btn-brutal-secondary:hover {
-  @apply bg-yellow-400 border-yellow-400;
+.btn-mm-secondary:hover {
+  @apply bg-yellow-50 border-yellow-300 text-gray-900;
 }
 
-/* ─── Input Fields ───────────────────────────────── */
-.input-brutal {
-  @apply w-full bg-white border-2 border-black rounded-sm px-6 py-4 text-black font-bold text-sm focus:border-orange-600 focus:ring-2 focus:ring-orange-600/20 transition-all outline-none placeholder:text-neutral-400;
+.btn-mm-accent {
+  @apply bg-yellow-400 text-gray-900 font-bold;
 }
 
-/* ─── Animations ─────────────────────────────────── */
+.btn-mm-accent:hover {
+  @apply bg-yellow-500;
+}
+
+/* ─── Input Fields ───────────────────────────── */
+.input-mm {
+  @apply w-full bg-gray-50 border border-gray-200 rounded-lg px-5 py-3.5 text-gray-800 font-medium text-sm focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 focus:bg-white transition-all outline-none placeholder:text-gray-400;
+}
+
+/* ─── Animations ─────────────────────────────── */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-fade-in-up {
@@ -93,7 +128,7 @@ body {
   animation: marquee 40s linear infinite;
 }
 
-/* ─── Utility ────────────────────────────────────── */
+/* ─── Utility ────────────────────────────────── */
 .text-giant {
   font-size: clamp(3rem, 10vw, 12rem);
   line-height: 0.9;
@@ -102,7 +137,19 @@ body {
 }
 
 .section-label {
-  @apply text-[11px] font-bold uppercase tracking-[0.15em];
+  @apply text-xs font-semibold uppercase tracking-widest;
+}
+
+.dark-blue {
+  color: #1e3a5f;
+}
+
+.bg-dark-blue {
+  background-color: #1e3a5f;
+}
+
+.border-dark-blue {
+  border-color: #1e3a5f;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
