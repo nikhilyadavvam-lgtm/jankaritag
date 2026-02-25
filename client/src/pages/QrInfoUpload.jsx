@@ -26,7 +26,7 @@ export default function QrInfoUpload() {
   const labels = {
     WATER_COOLER: {
       title: "Water Cooler Tag",
-      desc: "Add details for your water cooler and get a QR sticker",
+      desc: "Add details for your water cooler and get a QR JTag",
       ownerLabel: "Service Provider / Responsible Person",
       infoLabel: "Maintenance/Cleaning Notes",
       infoPlaceholder: "Cleaning frequency, last serviced date...",
@@ -34,7 +34,7 @@ export default function QrInfoUpload() {
     },
     VEHICLE: {
       title: "Vehicle Tag",
-      desc: "Add your vehicle details and get a QR sticker",
+      desc: "Add your vehicle details and get a QR JTag",
       ownerLabel: "Owner Name",
       infoLabel: "Additional Details",
       infoPlaceholder: "Make, model, registration number...",
@@ -133,6 +133,25 @@ export default function QrInfoUpload() {
 
         const rzp = new window.Razorpay(options);
         rzp.open();
+        return;
+      }
+
+      // ── DEV MODE: No payment required, create tag directly ──
+      if (res.data.success && res.data.devMode) {
+        try {
+          const verifyRes = await API.post("/qrinfo/verify-and-create", {
+            tagData: payload,
+          });
+          if (verifyRes.data.success) {
+            navigate(`/genqrcode?id=${verifyRes.data.customId}`);
+          } else {
+            setError("Tag creation failed.");
+            setLoading(false);
+          }
+        } catch {
+          setError("Tag creation failed.");
+          setLoading(false);
+        }
         return;
       }
 
@@ -276,7 +295,7 @@ export default function QrInfoUpload() {
                   </div>
                   <p className="text-xs text-gray-500">
                     Enter the customer's email so they can login and manage
-                    their tag, update details, and order stickers.
+                    their tag, update details, and order JTags.
                   </p>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-600">

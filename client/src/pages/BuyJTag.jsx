@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import Layout from "../components/Layout";
 import API from "../api";
 
-export default function BuySticker() {
+export default function BuyJTag() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
@@ -84,7 +84,7 @@ export default function BuySticker() {
           amount: res.data.amount * 100,
           currency: "INR",
           name: "JankariTag",
-          description: `Sticker Order — ${quantity} × ₹${unitPrice}`,
+          description: `JTag Order — ${quantity} × ₹${unitPrice}`,
           order_id: res.data.razorpayOrderId,
           handler: async (response) => {
             try {
@@ -123,6 +123,12 @@ export default function BuySticker() {
         return;
       }
 
+      // ── DEV MODE: Order created without payment ──
+      if (res.data.success && res.data.devMode) {
+        navigate("/profile");
+        return;
+      }
+
       setError("Something went wrong.");
     } catch (err) {
       setError(err.response?.data?.message || "Order failed");
@@ -132,7 +138,7 @@ export default function BuySticker() {
   };
 
   const whatsappText = encodeURIComponent(
-    `Hello, I want to order ${quantity} QR sticker(s) for Tag ID: ${tagId}.\n\nName: ${form.name}\nPhone: ${form.phone}\nAddress: ${form.address}\nPincode: ${form.pincode}\nQuantity: ${quantity}\nImage: ${imgurls?.cardImg || ""}`,
+    `Hello, I want to order ${quantity} QR JTag(s) for Tag ID: ${tagId}.\n\nName: ${form.name}\nPhone: ${form.phone}\nAddress: ${form.address}\nPincode: ${form.pincode}\nQuantity: ${quantity}\nImage: ${imgurls?.cardImg || ""}`,
   );
 
   if (authLoading || loading)
@@ -156,7 +162,7 @@ export default function BuySticker() {
               Login Required
             </h2>
             <p className="text-gray-500 text-sm mb-6">
-              Please login to order stickers
+              Please login to order JTags
             </p>
             <Link
               to="/login"
@@ -188,7 +194,7 @@ export default function BuySticker() {
               </div>
               <div>
                 <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight leading-none mb-1">
-                  Order Stickers
+                  Order JTags
                 </h1>
                 <p className="text-gray-500 text-xs md:text-sm">
                   Tag ID:{" "}
@@ -218,7 +224,7 @@ export default function BuySticker() {
                   <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
                     <img
                       src={imgurls.cardImg}
-                      alt="QR Sticker"
+                      alt="QR JTag"
                       className="w-full rounded-lg"
                     />
                   </div>
@@ -249,16 +255,82 @@ export default function BuySticker() {
               <div className="mm-card p-5 bg-yellow-50 border-yellow-200">
                 <p className="text-xs font-bold text-gray-900 mb-3">
                   <i className="ri-price-tag-3-fill text-yellow-600 mr-1"></i>{" "}
-                  Sticker Pricing
+                  JTag Pricing
                 </p>
                 <div className="space-y-2 text-sm text-gray-600">
                   <div className="flex justify-between">
-                    <span>1-9 stickers</span>
+                    <span>1-9 JTags</span>
                     <span className="font-bold text-gray-900">₹59 each</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>10+ stickers</span>
+                    <span>10+ JTags</span>
                     <span className="font-bold text-yellow-600">₹49 each</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* JTag Features */}
+              <div className="mm-card p-5 bg-white border-gray-200">
+                <p className="text-sm font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">
+                  <i className="ri-information-fill text-yellow-500 mr-2"></i>
+                  What's on your JTag?
+                </p>
+                <div className="space-y-4">
+                  <div className="flex gap-3 items-start">
+                    <div className="w-8 h-8 rounded-lg bg-yellow-50 flex items-center justify-center shrink-0 border border-yellow-100">
+                      <span className="font-bold text-yellow-600 text-sm">
+                        1
+                      </span>
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-gray-900">
+                        Category
+                      </p>
+                      <p className="text-[11px] text-gray-500 mt-0.5 leading-tight">
+                        Asset type for easy identification
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <div className="w-8 h-8 rounded-lg bg-yellow-50 flex items-center justify-center shrink-0 border border-yellow-100">
+                      <span className="font-bold text-yellow-600 text-sm">
+                        2
+                      </span>
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-gray-900">Name</p>
+                      <p className="text-[11px] text-gray-500 mt-0.5 leading-tight">
+                        Your name or asset's name
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <div className="w-8 h-8 rounded-lg bg-yellow-50 flex items-center justify-center shrink-0 border border-yellow-100">
+                      <span className="font-bold text-yellow-600 text-sm">
+                        3
+                      </span>
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-gray-900">
+                        ID / Reg No.
+                      </p>
+                      <p className="text-[11px] text-gray-500 mt-0.5 leading-tight">
+                        Unique identifier for validation
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3 pt-3 border-t border-gray-50 mt-2 items-start">
+                    <div className="w-8 h-8 rounded-lg bg-dark-blue flex items-center justify-center shrink-0">
+                      <i className="ri-qr-code-line text-yellow-400 text-sm"></i>
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-gray-900">
+                        Smart QR Code
+                      </p>
+                      <p className="text-[11px] text-gray-500 mt-0.5 leading-tight">
+                        Scannable by anyone to contact you
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -360,7 +432,7 @@ export default function BuySticker() {
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between text-gray-600">
                     <span>
-                      {quantity} sticker{quantity > 1 ? "s" : ""} × ₹{unitPrice}
+                      {quantity} JTag{quantity > 1 ? "s" : ""} × ₹{unitPrice}
                     </span>
                     <span className="font-semibold text-gray-900">
                       ₹{totalPrice}

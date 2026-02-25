@@ -165,6 +165,19 @@ app.post("/api/qrinfo/initiate", verifyToken, async (req, res) => {
         .json({ success: false, message: "This Tag ID already exists." });
     }
 
+    const isDev = (process.env.DEV_MODE || "").trim().toLowerCase() === "true";
+
+    // ── DEV MODE: Skip payment entirely ──
+    if (isDev) {
+      console.log("🔧 [DEV] Bypassing payment for tag creation:", customId);
+      return res.json({
+        success: true,
+        devMode: true,
+        requiresPayment: false,
+        amount: 0,
+      });
+    }
+
     // Everyone pays ₹120
     const amount = 120;
     let razorpayOrderId = null;
@@ -217,6 +230,36 @@ app.post("/api/qrinfo/initiate", verifyToken, async (req, res) => {
 // Step 2: Verify payment and create tag
 app.post("/api/qrinfo/verify-and-create", verifyToken, async (req, res) => {
   try {
+    const isDev = (process.env.DEV_MODE || "").trim().toLowerCase() === "true";
+
+    // ── DEV MODE: Create tag directly without payment verification ──
+    if (isDev) {
+      const { tagData } = req.body;
+      if (!tagData) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Missing tag details." });
+      }
+
+      const tagPayload = {
+        ...tagData,
+        createdBy: req.user._id,
+      };
+      if (tagData.customerEmail && req.user.role === "shopkeeper") {
+        tagPayload.customerEmail = tagData.customerEmail.trim().toLowerCase();
+      }
+      const qrinfo = new Qrinfo(tagPayload);
+      await qrinfo.save();
+
+      console.log("🔧 [DEV] Tag created without payment:", qrinfo.customId);
+
+      return res.json({
+        success: true,
+        customId: qrinfo.customId,
+        message: "[DEV] Tag created without payment!",
+      });
+    }
+
     const {
       razorpay_order_id,
       razorpay_payment_id,

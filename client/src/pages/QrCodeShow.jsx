@@ -82,10 +82,6 @@ export default function QrCodeShow() {
       </Layout>
     );
 
-  const whatsappText = encodeURIComponent(
-    `Hello, I want to order this QR sticker for our asset.\n\nCustom ID: ${customId}\nImage Link: ${imgurls.cardImg}`,
-  );
-
   return (
     <Layout>
       <div className="bg-white min-h-screen py-24 px-6">
@@ -135,14 +131,13 @@ export default function QrCodeShow() {
                   <i className="ri-download-cloud-2-line text-lg group-hover:-translate-y-0.5 transition-transform"></i>{" "}
                   Download
                 </a>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={`https://wa.me/919667446393?text=${whatsappText}`}
-                  className="flex items-center justify-center gap-2 py-3.5 bg-green-500 hover:bg-green-600 text-white font-semibold text-sm rounded-lg transition-all"
+                <Link
+                  to={`/buy-JTag?tagId=${customId}`}
+                  className="btn-mm btn-mm-accent py-3.5 flex items-center justify-center gap-2"
                 >
-                  <i className="ri-whatsapp-line text-lg"></i> Order • ₹59
-                </a>
+                  <i className="ri-shopping-cart-2-fill text-lg"></i> Order JTag
+                  — ₹59
+                </Link>
                 <button
                   onClick={() => navigate(`/data?id=${customId}`)}
                   className="sm:col-span-2 btn-mm btn-mm-secondary py-3.5"

@@ -57,9 +57,9 @@ export default function Profile() {
 
   const paidOrders = orders.filter((o) => o.paymentStatus === "paid");
   const planPayments = orders.filter((o) => o.address === "Online Service");
-  const stickerOrders = orders.filter((o) => o.address !== "Online Service");
+  const JTagOrders = orders.filter((o) => o.address !== "Online Service");
   const totalSpent = paidOrders.reduce((sum, o) => sum + (o.amount || 0), 0);
-  const totalStickers = stickerOrders
+  const totalJTags = JTagOrders
     .filter((o) => o.paymentStatus === "paid")
     .reduce((sum, o) => sum + (o.quantity || 1), 0);
 
@@ -169,8 +169,8 @@ export default function Profile() {
                   bg: "bg-green-50",
                 },
                 {
-                  label: "Stickers",
-                  value: totalStickers,
+                  label: "JTags",
+                  value: totalJTags,
                   icon: "ri-sticky-note-fill",
                   color: "text-pink-600",
                   bg: "bg-pink-50",
@@ -270,7 +270,7 @@ export default function Profile() {
                       key={tag._id}
                       className="mm-card h-full flex flex-col overflow-hidden"
                     >
-                      {/* Sticker Image */}
+                      {/* JTag Image */}
                       <div className="relative aspect-16/11 bg-gray-50 overflow-hidden flex items-center justify-center">
                         {tag.imgurl && !tag.imgurl.startsWith("/") ? (
                           <img
@@ -342,12 +342,12 @@ export default function Profile() {
                           </button>
                           <button
                             onClick={() =>
-                              navigate(`/buy-sticker?tagId=${tag.customId}`)
+                              navigate(`/buy-JTag?tagId=${tag.customId}`)
                             }
                             className="col-span-2 py-2.5 bg-yellow-400 text-gray-900 rounded-lg text-xs font-bold cursor-pointer flex items-center justify-center gap-2 hover:bg-yellow-500 transition-all"
                           >
                             <i className="ri-shopping-cart-2-fill text-sm"></i>{" "}
-                            Buy Sticker — ₹59
+                            Buy JTag — ₹59
                           </button>
                         </div>
                       </div>
@@ -375,7 +375,7 @@ export default function Profile() {
                   </h2>
                   <p className="text-gray-400 text-sm font-medium max-w-sm mx-auto mb-8">
                     You haven't made any purchases yet. Create a tag or buy
-                    stickers!
+                    JTags!
                   </p>
                   <button
                     onClick={() => navigate("/")}
@@ -450,22 +450,22 @@ export default function Profile() {
                     </div>
                   )}
 
-                  {/* ── Sticker Orders ── */}
-                  {stickerOrders.length > 0 && (
+                  {/* ── JTag Orders ── */}
+                  {JTagOrders.length > 0 && (
                     <div>
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-8 h-8 rounded-lg bg-yellow-100 flex items-center justify-center">
                           <i className="ri-shopping-bag-fill text-yellow-600 text-sm"></i>
                         </div>
                         <h3 className="font-bold text-gray-900 text-sm">
-                          Sticker Orders
+                          JTag Orders
                         </h3>
                         <span className="ml-auto text-[10px] font-semibold bg-yellow-100 text-yellow-700 px-2.5 py-1 rounded-full">
-                          {stickerOrders.length} orders
+                          {JTagOrders.length} orders
                         </span>
                       </div>
                       <div className="space-y-4">
-                        {stickerOrders.map((order) => (
+                        {JTagOrders.map((order) => (
                           <div
                             key={order._id}
                             className="mm-card-lg overflow-hidden"
@@ -488,7 +488,7 @@ export default function Profile() {
                                 >
                                   {order.address === "Online Service"
                                     ? "Plan ₹120"
-                                    : "Sticker"}
+                                    : "JTag"}
                                 </span>
                               </div>
                               <div className="flex items-center gap-2">
@@ -525,7 +525,7 @@ export default function Profile() {
                                     Quantity
                                   </p>
                                   <p className="text-sm font-bold text-gray-900">
-                                    {order.quantity || 1} sticker
+                                    {order.quantity || 1} JTag
                                     {(order.quantity || 1) > 1 ? "s" : ""}
                                   </p>
                                 </div>
@@ -729,7 +729,7 @@ export default function Profile() {
                 <div className="mb-6 overflow-hidden rounded-xl bg-gray-50 border border-gray-100 p-3">
                   <img
                     src={selectedTag.imgurl}
-                    alt="Sticker"
+                    alt="JTag"
                     className="w-full rounded-lg"
                   />
                 </div>
@@ -795,13 +795,13 @@ export default function Profile() {
                 </button>
                 <button
                   onClick={() => {
-                    navigate(`/buy-sticker?tagId=${selectedTag.customId}`);
+                    navigate(`/buy-JTag?tagId=${selectedTag.customId}`);
                     setSelectedTag(null);
                   }}
                   className="btn-mm btn-mm-accent flex-[1.5] py-3 flex items-center justify-center gap-2"
                 >
                   <i className="ri-shopping-cart-2-fill text-lg"></i> Buy
-                  Sticker — ₹59
+                  JTag — ₹59
                 </button>
               </div>
             </div>

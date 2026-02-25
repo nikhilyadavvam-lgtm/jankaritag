@@ -30,7 +30,7 @@ export default function TermsAndConditions() {
       icon: "ri-money-dollar-circle-fill",
       title: "IV. Service Charges",
       content:
-        "Digital QR registration is free. Physical QR sticker orders are charged at the listed price (currently ₹59). Prices may change with prior notice. Payments are processed through secure third-party channels.",
+        "Digital QR registration is free. Physical QR JTag orders are charged at the listed price (currently ₹59). Prices may change with prior notice. Payments are processed through secure third-party channels.",
       color: "text-yellow-600",
       bg: "bg-yellow-50",
     },

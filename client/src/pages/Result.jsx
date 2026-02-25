@@ -217,11 +217,11 @@ export default function Result() {
                 </a>
               )}
               <Link
-                to={`/buy-sticker?tagId=${data.customId}`}
+                to={`/buy-JTag?tagId=${data.customId}`}
                 className="btn-mm btn-mm-accent flex-1 py-3.5 flex items-center justify-center gap-3"
               >
                 <i className="ri-shopping-cart-2-fill text-lg"></i> Order
-                Sticker — ₹59
+                JTag — ₹59
               </Link>
             </div>
           </div>

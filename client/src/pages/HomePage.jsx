@@ -204,7 +204,7 @@ export default function HomePage() {
                     },
                     {
                       title: "Easy to Use",
-                      desc: "Create a tag in 2 minutes. Print the sticker, stick it on your item, and you're done!",
+                      desc: "Create a tag in 2 minutes. Print the JTag, stick it on your item, and you're done!",
                       icon: "ri-thumb-up-fill",
                       color: "bg-pink-100 text-pink-600",
                     },
@@ -231,8 +231,157 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Meet the JTag */}
+        <section className="py-20 bg-white border-t border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <div className="order-2 lg:order-1 lg:pr-10">
+                <span className="section-label text-yellow-600 mb-3 inline-block">
+                  Meet the JTag
+                </span>
+                <h2 className="font-extrabold text-[clamp(26px,4vw,40px)] tracking-tight text-gray-900 leading-tight mb-8">
+                  Everything you need to know, <br />
+                  <span className="text-yellow-500">at a glance.</span>
+                </h2>
+                <div className="space-y-6">
+                  <div className="flex gap-4 items-start mm-card-lg p-4 bg-gray-50 border-0">
+                    <div className="w-10 h-10 rounded-xl bg-yellow-100 flex items-center justify-center shrink-0 shadow-sm border border-yellow-200">
+                      <span className="font-black text-yellow-600 text-lg">
+                        1
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-900 text-[15px]">
+                        Category
+                      </h4>
+                      <p className="text-sm text-gray-500 mt-1">
+                        Identifies the type of asset (e.g., VEHICLE, LUGGAGE,
+                        SHOP).
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4 items-start mm-card-lg p-4 bg-gray-50 border-0">
+                    <div className="w-10 h-10 rounded-xl bg-yellow-100 flex items-center justify-center shrink-0 shadow-sm border border-yellow-200">
+                      <span className="font-black text-yellow-600 text-lg">
+                        2
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-900 text-[15px]">
+                        Name
+                      </h4>
+                      <p className="text-sm text-gray-500 mt-1">
+                        The owner's name or the asset's specific identifier for
+                        easy recognition.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4 items-start mm-card-lg p-4 bg-gray-50 border-0">
+                    <div className="w-10 h-10 rounded-xl bg-yellow-100 flex items-center justify-center shrink-0 shadow-sm border border-yellow-200">
+                      <span className="font-black text-yellow-600 text-lg">
+                        3
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-900 text-[15px]">
+                        Id (Registration / Custom ID)
+                      </h4>
+                      <p className="text-sm text-gray-500 mt-1">
+                        A unique identifier corresponding to your asset for
+                        secure validation.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4 items-start mm-card p-4 bg-dark-blue border-0 shadow-lg">
+                    <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                      <i className="ri-qr-code-line text-xl text-yellow-400"></i>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white text-[15px]">
+                        Smart QR Code
+                      </h4>
+                      <p className="text-gray-300 text-sm mt-1">
+                        Anyone can scan this using their phone to contact you or
+                        view details instantly.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="order-1 lg:order-2 flex justify-center perspective-[2000px]">
+                {/* CSS JTag Preview */}
+                <div className="relative w-full max-w-[440px] bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 transform rotate-y-[-10deg] rotate-x-[5deg] hover:rotate-y-0 hover:rotate-x-0 transition-transform duration-700 ease-out group">
+                  {/* Yellow Banner */}
+                  <div className="w-full bg-yellow-400 py-4 text-center border-b-2 border-gray-900">
+                    <h3 className="font-black text-3xl tracking-tighter text-gray-900 uppercase leading-none">
+                      Jankari Tag
+                    </h3>
+                    <p className="text-xs font-bold text-gray-800 tracking-wide mt-1">
+                      A part of YadavG Devs
+                    </p>
+                  </div>
+
+                  {/* Content Area */}
+                  <div className="flex h-[200px] p-5 items-stretch relative bg-white">
+                    {/* Left Info Box */}
+                    <div className="flex-1 border-2 border-gray-900 rounded-xl flex flex-col justify-center px-4 py-2 gap-3 bg-white z-10 mr-4 shadow-[4px_4px_0px_#111827] group-hover:shadow-[2px_2px_0px_#111827] transition-all">
+                      <p className="text-[13px] font-semibold text-gray-500 flex justify-between items-end border-b border-gray-100 pb-1.5">
+                        <span className="w-20 tracking-wide">Category:</span>{" "}
+                        <span className="flex-1 font-bold text-gray-900 text-right uppercase">
+                          VEHICLE
+                        </span>
+                      </p>
+                      <p className="text-[13px] font-semibold text-gray-500 flex justify-between items-end border-b border-gray-100 pb-1.5">
+                        <span className="w-20 tracking-wide">Name:</span>{" "}
+                        <span className="flex-1 font-bold text-gray-900 text-right truncate">
+                          Rahul Yadav
+                        </span>
+                      </p>
+                      <p className="text-[13px] font-semibold text-gray-500 flex justify-between items-end">
+                        <span className="w-20 tracking-wide">Id:</span>{" "}
+                        <span className="flex-1 font-bold text-gray-900 text-right font-mono">
+                          RJ14SH3909
+                        </span>
+                      </p>
+                    </div>
+
+                    {/* Right QR Box */}
+                    <div className="w-[110px] flex flex-col items-center justify-center shrink-0">
+                      <p className="text-[11px] font-bold text-gray-900 mb-2 shrink-0 text-center leading-tight">
+                        Scan JTag
+                        <br />
+                        and Know
+                      </p>
+                      <div className="border-2 border-gray-900 p-1.5 bg-white rounded-xl shadow-[4px_4px_0px_#111827] group-hover:shadow-[2px_2px_0px_#111827] transition-all">
+                        <img
+                          src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jankaritag.in&format=svg`}
+                          alt="QR"
+                          className="w-[80px] h-[80px]"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Footer */}
+                  <div className="bg-gray-50 px-5 h-12 border-t border-gray-200 flex items-center justify-center relative">
+                    <p className="text-[11px] font-bold text-gray-600 uppercase tracking-widest text-center">
+                      Get Your Own JTag Now Visit Jankaritag.in
+                    </p>
+                    <div className="absolute right-3 text-[9px] font-bold text-gray-400">
+                      ©NIKHIM
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Pricing Plans */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-gray-50">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
             <div className="text-center mb-14 animate-fade-in-up">
               <span className="section-label text-yellow-600 mb-3 inline-block">
@@ -308,7 +457,7 @@ export default function HomePage() {
               )}
             </div>
 
-            {/* Sticker Pricing Note */}
+            {/* JTag Pricing Note */}
             <div className="mm-card p-6 text-center animate-fade-in-up">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <div className="flex items-center gap-3">
@@ -317,10 +466,10 @@ export default function HomePage() {
                   </div>
                   <div className="text-left">
                     <p className="text-sm font-bold text-gray-900">
-                      Physical Sticker Price
+                      Physical JTag Price
                     </p>
                     <p className="text-xs text-gray-500">
-                      Printed QR sticker delivered to your door
+                      Printed QR JTag delivered to your door
                     </p>
                   </div>
                 </div>
@@ -348,15 +497,15 @@ export default function HomePage() {
           <div className="flex flex-col items-center">
             <div className="whitespace-nowrap overflow-hidden w-full">
               <div className="flex animate-marquee">
-                <h2 className="text-giant text-gray-100 tracking-tighter px-10">
+                <h2 className="text-giant text-gray-300 tracking-tighter px-10">
                   JankariTag
                 </h2>
-                <h2 className="text-giant text-gray-100 tracking-tighter px-10">
+                <h2 className="text-giant text-gray-300 tracking-tighter px-10">
                   JankariTag
                 </h2>
               </div>
             </div>
-            <p className="text-xs font-medium text-gray-300 mt-6 mb-0 tracking-[0.5em] uppercase">
+            <p className="text-xs font-medium text-gray-500 mt-6 mb-0 tracking-[0.5em] uppercase">
               Smart QR Tags for Everyone
             </p>
           </div>

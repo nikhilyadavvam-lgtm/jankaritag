@@ -10,7 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminDashboard from "./pages/AdminDashboard";
 import Profile from "./pages/Profile";
-import BuySticker from "./pages/BuySticker";
+import BuyJTag from "./pages/BuyJTag";
 import ShopkeeperDashboard from "./pages/ShopkeeperDashboard";
 import { useAuth } from "./context/AuthContext";
 
@@ -49,10 +49,10 @@ function App() {
         }
       />
       <Route
-        path="/buy-sticker"
+        path="/buy-JTag"
         element={
           <ProtectedRoute>
-            <BuySticker />
+            <BuyJTag />
           </ProtectedRoute>
         }
       />

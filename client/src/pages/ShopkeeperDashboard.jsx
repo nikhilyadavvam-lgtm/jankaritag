@@ -222,7 +222,7 @@ export default function ShopkeeperDashboard() {
                             className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
                               c.type === "qr_creation"
                                 ? "bg-yellow-100 text-yellow-700"
-                                : c.type === "sticker_order"
+                                : c.type === "JTag_order"
                                   ? "bg-blue-100 text-blue-700"
                                   : c.type === "referral_qr"
                                     ? "bg-purple-100 text-purple-700"

@@ -228,9 +228,9 @@ export default function AdminDashboard() {
   const servicePayments = allOrders.filter(
     (o) => o.address === "Online Service",
   );
-  const stickerOrders = allOrders.filter((o) => o.address !== "Online Service");
+  const JTagOrders = allOrders.filter((o) => o.address !== "Online Service");
 
-  const filteredStickerOrders = stickerOrders.filter(
+  const filteredJTagOrders = JTagOrders.filter(
     (o) =>
       (o.name?.toLowerCase() || "").includes(search.toLowerCase()) ||
       (o.phone || "").includes(search) ||
@@ -247,7 +247,7 @@ export default function AdminDashboard() {
   const serviceRevenue = servicePayments
     .filter((o) => o.paymentStatus === "paid")
     .reduce((s, o) => s + (o.amount || 0), 0);
-  const stickerRevenue = stickerOrders
+  const JTagRevenue = JTagOrders
     .filter((o) => o.paymentStatus === "paid")
     .reduce((s, o) => s + (o.amount || 0), 0);
 
@@ -311,14 +311,14 @@ export default function AdminDashboard() {
                   color: "text-green-400",
                 },
                 {
-                  label: "Stickers",
-                  value: stats?.totalStickers || 0,
+                  label: "JTags",
+                  value: stats?.totalJTags || 0,
                   icon: "ri-sticky-note-fill",
                   color: "text-blue-400",
                 },
                 {
-                  label: "Sticker Orders",
-                  value: stickerOrders.length,
+                  label: "JTag Orders",
+                  value: JTagOrders.length,
                   icon: "ri-shopping-cart-2-fill",
                   color: "text-purple-400",
                 },
@@ -329,8 +329,8 @@ export default function AdminDashboard() {
                   color: "text-cyan-400",
                 },
                 {
-                  label: "Sticker ₹",
-                  value: `₹${stickerRevenue}`,
+                  label: "JTag ₹",
+                  value: `₹${JTagRevenue}`,
                   icon: "ri-money-rupee-circle-fill",
                   color: "text-emerald-400",
                 },
@@ -366,7 +366,7 @@ export default function AdminDashboard() {
                 { key: "tags", label: "Tags", icon: "ri-price-tag-3-fill" },
                 {
                   key: "orders",
-                  label: "Stickers",
+                  label: "JTags",
                   icon: "ri-shopping-cart-2-fill",
                 },
                 { key: "services", label: "Services", icon: "ri-global-fill" },
@@ -402,7 +402,7 @@ export default function AdminDashboard() {
             </div>
             <span className="px-3 py-1 text-[10px] font-semibold text-gray-400 bg-white rounded-full shadow-sm">
               {activeTab === "orders"
-                ? filteredStickerOrders.length
+                ? filteredJTagOrders.length
                 : activeTab === "services"
                   ? filteredServicePayments.length
                   : activeTab === "tags"
@@ -537,7 +537,7 @@ export default function AdminDashboard() {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredStickerOrders.map((order, i) => (
+                    {filteredJTagOrders.map((order, i) => (
                       <tr
                         key={order._id}
                         className={`${i % 2 === 0 ? "bg-white" : "bg-gray-50"} border-b border-gray-100`}
@@ -592,7 +592,7 @@ export default function AdminDashboard() {
                   </tbody>
                 </table>
               </div>
-              {filteredStickerOrders.length === 0 && (
+              {filteredJTagOrders.length === 0 && (
                 <div className="py-16 text-center">
                   <i className="ri-shopping-cart-line text-4xl text-gray-200 mb-4 block"></i>
                   <p className="text-gray-400 text-sm font-medium">
@@ -866,7 +866,7 @@ export default function AdminDashboard() {
                                   className={`text-[10px] font-semibold capitalize px-2.5 py-1 rounded-full ${
                                     c.type === "qr_creation"
                                       ? "bg-orange-100 text-orange-700"
-                                      : c.type === "sticker_order"
+                                      : c.type === "JTag_order"
                                         ? "bg-blue-100 text-blue-700"
                                         : c.type === "referral_qr"
                                           ? "bg-purple-100 text-purple-700"

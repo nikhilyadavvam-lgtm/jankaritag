@@ -31,8 +31,8 @@ const calculatePrice = (qty) => {
   return qty * 59;
 };
 
-// ── Create Razorpay Order ──────────────────────────────
-router.post("/create", verifyToken, async (req, res) => {
+// ── Initiate JTag Order ──────────────────────────────
+router.post("/initiate", verifyToken, async (req, res) => {
   try {
     const { tagId, name, phone, address, pincode, quantity = 1 } = req.body;
 
@@ -43,6 +43,32 @@ router.post("/create", verifyToken, async (req, res) => {
     }
 
     const amount = calculatePrice(quantity);
+    const isDev = (process.env.DEV_MODE || "").trim().toLowerCase() === "true";
+
+    // ── DEV MODE: Create order directly as paid, skip Razorpay ──
+    if (isDev) {
+      const order = new Order({
+        userId: req.user._id,
+        tagId,
+        name,
+        phone,
+        address,
+        pincode,
+        quantity,
+        amount,
+        paymentStatus: "paid",
+        orderStatus: "processing",
+      });
+      await order.save();
+
+      console.log("🔧 [DEV] Order created without payment:", order._id);
+      return res.json({
+        success: true,
+        devMode: true,
+        requiresPayment: false,
+        order: { id: order._id, amount },
+      });
+    }
 
     // Create Razorpay order if initialized
     let razorpayOrderId = null;
@@ -73,22 +99,25 @@ router.post("/create", verifyToken, async (req, res) => {
       quantity,
       amount,
       razorpayOrderId,
-      paymentStatus: razorpayOrderId ? "pending" : "pending",
+      paymentStatus: "pending",
     });
 
     await order.save();
 
     res.json({
       success: true,
+      requiresPayment: true,
+      amount,
+      razorpayOrderId,
+      razorpayKeyId: rzpKeyId || null,
       order: {
         id: order._id,
         amount,
         razorpayOrderId,
-        razorpayKeyId: rzpKeyId || null,
       },
     });
   } catch (err) {
-    console.error("Order create error:", err);
+    console.error("Order initiate error:", err);
     res
       .status(500)
       .json({ success: false, message: "Failed to create order." });

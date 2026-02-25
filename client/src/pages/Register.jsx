@@ -108,7 +108,7 @@ export default function Register() {
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="ri-checkbox-circle-fill text-yellow-500 text-sm"></i>{" "}
-                  Save on sticker printing & delivery
+                  Save on JTag printing & delivery
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="ri-checkbox-circle-fill text-yellow-500 text-sm"></i>{" "}
